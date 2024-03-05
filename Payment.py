@@ -16,7 +16,7 @@ class PaymentMethod:
     def buy_coin(self, username, price):
         user = Controller.get_user_by_username(username)
         date_time = datetime.now()
-        user.add_golden_coin(golden_amount)
+        user.add_golden_coin(price)
         user.add_silver_coin(silver_amount)
         user.add_coin_transaction_list(CoinTransaction.CoinTransaction(payment, price, [golden_amount, silver_amount], date_time.strftime("%d/%m/%Y, %H:%M:%S")))
         
