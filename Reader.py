@@ -1,6 +1,7 @@
 from Book import Book
 from Chapter import Chapter
-from Coin import Coin
+from Coin import GoldenCoin
+from Coin import SilverCoin
 from ChapterTransaction import ChapterTransaction
 from CoinTransaction import CoinTransaction
 
@@ -11,7 +12,7 @@ class Reader:
         self.__username = username
         self.__password = password
         self.__birth_date = birth_date #check age_restricted
-        self.__golden_coin = Coin.GoldenCoin(0)
+        self.__golden_coin = GoldenCoin(0)
         self.__silver_coin_list = []
         self.__book_shelf_list = []
         self.__recent_read_chapter_list = []
@@ -47,7 +48,7 @@ class Reader:
     def get_silver_coin_list(self):
         return self.__silver_coin_list
     def add_silver_coin(self, amount):
-        self.__silver_coin_list.append(Coin.SilverCoin(amount))
+        self.__silver_coin_list.append(SilverCoin(amount))
     def delete_exp_silver_coin(self):
         for silver_coin in self.__silver_coin_list:
             if silver_coin.exp_date_time - datetime.today():
@@ -108,7 +109,7 @@ class Reader:
     def get_coin_transaction_list(self):
         return self.__coin_transaction_list
     def add_coin_transaction_list(self, coin_transaction):
-        if isinstance(coin_transaction, CoinTransaction.CoinTransaction):
+        if isinstance(coin_transaction, CoinTransaction):
             self.__coin_transaction_list.append(coin_transaction)
 
 class Writer(Reader):
@@ -121,5 +122,5 @@ class Writer(Reader):
     def writing_book_list(self):
         return self.__writing_book_list
     def add_writing_book_list(self, book):
-        if isinstance(book, Book.Book):
+        if isinstance(book, Book):
             self.__writing_book_list.append(book)

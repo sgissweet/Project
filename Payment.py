@@ -82,4 +82,3 @@ class TrueMoneyWallet(PaymentMethod):
         print(f"Total {price} baht")
         print(f"An  number will be sent to phone number {self.__phone_number} in a moment")
         print("Purchase successful, THANK YOU")
-        print("eiei")

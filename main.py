@@ -1,6 +1,8 @@
 from Book import Book
 from Chapter import Chapter
-from Payment import Payment
+from Payment import TrueMoneyWallet
+from Payment import OnlineBanking
+from Payment import DebitCard
 from Promotion import BookPromotion
 from Promotion import CoinPromotion
 from Reader import Reader
@@ -9,7 +11,7 @@ from Controller import Controller
 
 from datetime import datetime, date, timedelta
 
-Controller = Controller.Controller()
+Controller = Controller()
 
 #create temporary instance
 Mo = Writer("Mozaza", "namchakeawpun", "12/05/2000")
@@ -38,8 +40,8 @@ free_coin = CoinPromotion("01/01/2021", 40, "chakeawaroi")
 now = datetime.now()
 
 
-Controller.buy_coin("Pinttttt", (Payment.TrueMoneyWallet("0123456789")), None, 5000)
-Controller.buy_coin("Pinttttt", (Payment.OnlineBanking("0123456789")), None, 100)
+Controller.buy_coin("Pinttttt", (TrueMoneyWallet("0123456789")), None, 5000)
+Controller.buy_coin("Pinttttt", (OnlineBanking("0123456789")), None, 100)
 
 from typing import Optional
 from fastapi import FastAPI
@@ -49,8 +51,8 @@ app = FastAPI()
 
 @app.get("/signup", tags=['Sign up'])
 def SignUp(username:str, password:str, birth_date: str):
-    new_reader = Reader.Reader(username,password,birth_date)
-    if isinstance(new_reader,Reader.Reader)==True:
+    new_reader = Reader(username,password,birth_date)
+    if isinstance(new_reader, Reader)==True:
         Controller.add_reader(new_reader)
         return {"User": "sign up success"}
     else : 
@@ -69,17 +71,13 @@ def get_coin_transaction(username:str):
     user = Controller.get_user_by_username(username)
     return {"Coin Transaction" : user.show_coin_transaction()}
 
-# @app.get("/get_my_coin", tags=['My Coin'])
-# def get_my_coin(username:str):
-#     user = Controller.get_user_by_username(username)
-#     return {"Golden Coin balance" : user.show_my_coin_list[0], "Silver Coin balance" : user.show_my_coin_list[1]}
-
-# Mo.show_coin_list()
-print(pintt.get_silver_coin_balance())
-# for silver_coin in Mo.get_silver_coin_list():
-#     print(silver_coin)
-#     print(silver_coin.balance)
+@app.get("/get_my_coin", tags=['My Coin'])
+def get_my_coin(username:str):
+    user = Controller.get_user_by_username(username)
+    return {"Golden Coin balance" : user.show_my_coin_list[0], "Silver Coin balance" : user.show_my_coin_list[1]}
 
 
-# print(Mo.show_coin_transaction())
+
+
+
 
