@@ -1,10 +1,10 @@
-#Reader.py
+from Book import Book
+from Chapter import Chapter
+from Coin import Coin
+from ChapterTransaction import ChapterTransaction
+from CoinTransaction import CoinTransaction
+
 from datetime import datetime, date, timedelta
-import Book
-import Chapter
-import Coin
-import ChapterTransaction
-import CoinTransaction
 
 class Reader:
     def __init__(self, username, password, birth_date):

@@ -1,26 +1,30 @@
 from Reader import Reader
 from Reader import Reader
 from Controller import Controller
+from CoinTransaction import CoinTransaction
 
 from dateutil import relativedelta
 from datetime import datetime, date, timedelta
 
 class PaymentMethod:
     def __init__(self):
+        self.__name = None
         self.__coin_promotion = []
     #=================================
+    @property
+    def name(self):
+        return self.__name
     @property
     def coin_promotion(self):
         return self.__coin_promotion
     #==================================method   
-    def buy_coin(self, username, price):
-        user = Controller.get_user_by_username(username)
-        date_time = datetime.now()
-        user.add_golden_coin(price)
-        user.add_silver_coin(silver_amount)
-        user.add_coin_transaction_list(CoinTransaction.CoinTransaction(payment, price, [golden_amount, silver_amount], date_time.strftime("%d/%m/%Y, %H:%M:%S")))
-        
-        
+    # def buy_coin(self, username, price):
+    #     silver_amount = int(price * 10 / 100)
+    #     user = Controller.get_user_by_username(username)
+    #     user.add_golden_coin(price)
+    #     user.add_silver_coin(silver_amount)
+    #     date_time = datetime.now()
+    #     user.add_coin_transaction_list(CoinTransaction(self.__name, price, [price, silver_amount], date_time.strftime("%d/%m/%Y, %H:%M:%S")))
         
     def buy_coin(self, price):
         pass
@@ -33,9 +37,6 @@ class OnlineBanking(PaymentMethod):
         self.__name = 'OnlineBanking'
         self.__account_id = account_id
     #==================================
-    @property
-    def name(self):
-        return self.__name
     @property
     def account_id(self):
         return self.__account_id
@@ -51,9 +52,6 @@ class DebitCard(PaymentMethod):
         self.__name = 'Debit Card'
         self.__card_id = card_id
     #==================================
-    @property
-    def name(self):
-        return self.__name
     @property
     def card_id(self):
         return self.__card_id
@@ -75,9 +73,6 @@ class TrueMoneyWallet(PaymentMethod):
         self.__name = 'TrueMoney Wallet'
         self.__phone_number = phone_number
     #==================================
-    @property
-    def name(self):
-        return self.__name
     @property
     def phone_number(self):
         return self.__phone_number

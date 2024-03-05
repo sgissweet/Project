@@ -1,7 +1,8 @@
 from Book import Book
 from Chapter import Chapter
 from Payment import Payment
-from Promotion import Promotion
+from Promotion import BookPromotion
+from Promotion import CoinPromotion
 from Reader import Reader
 from Reader import Writer
 from Controller import Controller
@@ -12,25 +13,25 @@ Controller = Controller.Controller()
 
 #create temporary instance
 Mo = Writer("Mozaza", "namchakeawpun", "12/05/2000")
+pintt = Reader("Pinttttt", "sawasdee", "01/01/2005")
 Controller.add_writer_to_list(Mo)
-pintt=Reader("Pinttttt", "sawasdee", "01/01/2005")
 Controller.add_reader_to_list(pintt)
 Controller.add_reader_to_list(Reader("Pangrum", "ehehe", "02/01/2005"))
 Controller.add_reader_to_list(Reader("Jueeen", "whippedcream", "12/11/2004"))
 
 # Book (self,name,writer,tag_list,status,age_restricted,prologue,date_time):
-Book1 = Book.Book("Shin_chan", Mo, ["kids", "comedy","crime"], "publishing", 7, "shin_chan_prologue", "01/01/2020")
-Book2 = Book.Book("Shinosuke", Mo, ["kids", "comedy","crime"], "publishing", 7, "shin_chan_prologue", "01/01/2020")
+Book1 = Book("Shin_chan", Mo, ["kids", "comedy","crime"], "publishing", 7, "shin_chan_prologue", "01/01/2020")
+Book2 = Book("Shinosuke", Mo, ["kids", "comedy","crime"], "publishing", 7, "shin_chan_prologue", "01/01/2020")
 Mo.add_writing_book_list(Book1)
 Mo.add_writing_book_list(Book2)
 
 #chapter_number, name, context, date_time, cost):
-Chapter1_1 = Chapter.Chapter("1", "first chapter of shinchan", "this is the first chapter of shinchan", "01/01/2020", 5)
+Chapter1_1 = Chapter("1", "first chapter of shinchan", "this is the first chapter of shinchan", "01/01/2020", 5)
 
-book_sale = Promotion.BookPromotion("01/01/2021",50, [])
+book_sale = BookPromotion("01/01/2021", 50, [])
 Controller.add_promotion(book_sale)
 
-free_coin = Promotion.CoinPromotion("01/01/2021",40, "chakeawaroi")
+free_coin = CoinPromotion("01/01/2021", 40, "chakeawaroi")
 
 # print(WriteARead.search_book_by_name("Shin_chan"))
 #=====================================================================================================

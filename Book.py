@@ -1,14 +1,15 @@
-import Controller
-import datetime
-import Chapter
-import Report
-import Comment
+from Controller import Controller
+from Chapter import Chapter
+from Report import Report
+from Comment import Comment
+
+from datetime import datetime
 
 class Book:
     viewer_count = 0
     add_to_shelf_count = 0
 
-    def __init__(self,name,writer,tag_list,status,age_restricted,prologue,date_time):
+    def __init__(self, name, writer, tag_list, status, age_restricted, prologue, date_time):
         self.__name = name
         self.__writer = writer
         self.__tag = tag_list
@@ -24,7 +25,7 @@ class Book:
     def name(self):
         return self.__name
     @name.setter
-    def name(self,name):
+    def name(self, name):
         self.__name = name
 
     @property
@@ -35,53 +36,53 @@ class Book:
     def tag(self):
         return self.__tag
     @tag.setter
-    def tag(self,tag):
+    def tag(self, tag):
         self.__tag = tag
     
     @property
     def age_restricted(self):
         return self.__age_restricted
     @age_restricted.setter
-    def age_restricted(self,age_restricted):
+    def age_restricted(self, age_restricted):
         self.__age_restricted = age_restricted
 
     @property
     def status(self):
         return self.__status
     @status.setter
-    def status(self,status):
+    def status(self, status):
         self.__status = status
 
     @property
     def prologue(self):
         return self.__prologue
     @prologue.setter
-    def prologue(self,prologue):
+    def prologue(self, prologue):
         self.__prologue = prologue
 
     @property
     def date_time(self):
         return self.__date_time
     @date_time.setter
-    def date_time(self,date_time):
+    def date_time(self, date_time):
         self.__date_time = date_time
 
     def get_chapter_list(self):
         return self.__chapter_list
-    def add_chapter_list(self,chapter):
-        if isinstance(chapter,Chapter):
+    def add_chapter_list(self, chapter):
+        if isinstance(chapter, Chapter):
             self.__chapter_list.append(chapter)
 
     def get_report_list(self):
         return self.__report_list
-    def add_report_list(self,report):
-        if isinstance(report,Report):
+    def add_report_list(self, report):
+        if isinstance(report, Report):
             self.__report_list.append(report)
 
     def get_comment_list(self):
         return self.__comment_list
-    def add_comment_list(self,comment):
-        if isinstance(comment,Comment):
+    def add_comment_list(self, comment):
+        if isinstance(comment, Comment):
             self.__comment_list.append(comment)
 
     def add_report_list(self, report):
