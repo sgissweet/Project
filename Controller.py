@@ -3,7 +3,7 @@ from Promotion import CoinPromotion, BookPromotion
 from Book import Book
 from Chapter import Chapter
 from Comment import Comment
-# from ChapterTransaction import ChapterTransaction
+from ChapterTransaction import ChapterTransaction
 from Reader import Reader, Writer
 from Payment import OnlineBanking, TrueMoneyWallet, DebitCard
 
@@ -149,20 +149,23 @@ class Controller:
             
         self.add_coin_to_user(user, payment, golden_amount, silver_amount, price)
     
-    def buy_chapter(self, chapter_id, book_name, username):
-        book = self.get_book_by_name(book_name)
-        chapter_list = book.get_chapter_list()
-
-        for chapter in chapter_list:
-            if chapter.chapter_id == chapter_id:
-                cost = chapter.cost
-
+    def buy_chapter(self, username, chapter_id):
         user = self.get_user_by_username(username)
+        if self.is_user_not_found(user): return user
+
+        chapter = self.get_chapter_by_chapter_id(chapter_id)
+        if not isinstance(chapter, Chapter): return chapter
+        
+        if user.check_repeated_purchase(chapter): return "You have already purchased this chapter."
+        
+        cost = chapter.cost
+
         coin_balance = user.get_user_coin_balance()
 
         if coin_balance >= cost:
             user.deduct_coin(cost)
-            user.add_chapter_transaction()
+            user.add_chapter_transaction_list(ChapterTransaction(chapter, cost))
+            return "Your purchase was successful"
         else:
             return "Not enough coin"
 

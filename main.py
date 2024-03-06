@@ -10,7 +10,7 @@ from typing import Optional, Annotated
 from fastapi import FastAPI, Query
 import uvicorn
 
-Controller = Controller()
+WriteARead = Controller()
 
 #create temporary instance
 Mo = Writer("Mozaza", "namchakeawpun", "12/05/2000")
@@ -79,5 +79,8 @@ def buy_coin(username:str, golden_coin_amount:int, payment_info: Annotated[str |
     Controller.buy_coin(username, payment, code, golden_coin_amount)  
     return "Purchase successful, THANK YOU"
 
+@app.post("/Buy Chapter", tags=['chapter'])
+def BuyChapter(username:str, chapter_id:str):
+     return {"Buy Chapter" : WriteARead.buy_chapter(username, chapter_id)}
 #uvicorn main:app --reload
 
