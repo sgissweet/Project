@@ -6,7 +6,7 @@ from Reader import Reader, Writer
 from Controller import Controller
 
 from datetime import datetime, date, timedelta
-from typing import Optional
+from typing import Optional, Annotated
 from fastapi import FastAPI, Query
 import uvicorn
 
@@ -63,7 +63,7 @@ def searchBook(book_name:str):
 def SearchUser(username:str):
      return {"username": Controller.search_user(username)}
 
-@app.get("/get_coin_transacttion", tags=['Coin Transaction'])
+@app.get("/get_coin_transaction", tags=['Coin Transaction'])
 def get_coin_transaction(username:str):
     user = Controller.get_user_by_username(username)
     return {"Coin Transaction" : user.show_coin_transaction()}
@@ -74,7 +74,7 @@ def get_my_coin(username:str):
     return {"Golden Coin balance" : user.golden_coin.balance, "Silver Coin balance" : user.show_silver_coin_list()}
 
 @app.post("/post_payment_method", tags=['Buy Coin'])
-def buy_coin(username:str, golden_coin_amount:int, payment_info:str, payment_method:str = Query("Payment Method", enum = Controller.payment_list, description ='Choose your payment method'), code: Optional[str] = None):
+def buy_coin(username:str, golden_coin_amount:int, payment_info: Annotated[str | None, Query(max_length = 10)], payment_method:str = Query("Payment Method", enum = Controller.payment_list, description ='Choose your payment method'), code: Optional[str] = None):
     payment = Controller.create_payment_method(payment_method, payment_info)
     Controller.buy_coin(username, payment, code, golden_coin_amount)  
     return "Purchase successful, THANK YOU"
