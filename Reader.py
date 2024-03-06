@@ -158,9 +158,13 @@ class Reader:
             price = coin_transaction.price
             date_time = coin_transaction.date_time
             if(payment_type != None):
-                show_list.append(f"{payment_type} {golden_amount}_golden_coin +{silver_amount}_silver_coin -{price} baht at {date_time}")
+                show_list.append(f"{payment_type} {golden_amount}_golden_coin {silver_amount}_silver_coin -{price} baht at {date_time}")
+            elif(silver_amount == '0'):
+                show_list.append(f"{payment_type} {golden_amount}_silver_coin at {date_time}")
+            elif(golden_amount == '0'):
+                show_list.append(f"{payment_type} {silver_amount}_silver_coin at {date_time}")
             else:
-                show_list.append(f"{golden_amount}_golden_coin +{silver_amount}_silver_coin at {date_time}")
+                show_list.append(f"{payment_type} {golden_amount}_golden_coin {silver_amount}_silver_coin at {date_time}")
             
         return show_list
 

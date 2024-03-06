@@ -71,5 +71,5 @@ class TrueMoneyWallet(PaymentMethod):
     def buy_coin(self, price):
         print("The system is implemented Please wait for the confirmation of the service")
         print(f"Total {price} baht")
-        print(f"An  number will be sent to phone number {self.__phone_number} in a moment")
+        print(f"An bill will be sent to phone number {self.__phone_number} in a moment")
         # print("Purchase successful, THANK YOU")

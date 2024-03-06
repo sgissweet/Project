@@ -81,4 +81,3 @@ def buy_coin(username:str, golden_coin_amount:int, payment_info:str, payment_met
 
 #uvicorn main:app --reload
 
-# print("eiei")
