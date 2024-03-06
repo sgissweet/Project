@@ -131,7 +131,7 @@ class Controller:
         date_time = datetime.now()
         user.add_golden_coin(golden_amount)
         user.add_silver_coin(silver_amount)
-        user.add_coin_transaction_list(CoinTransaction(payment, price, f"+{golden_amount}", f"+{silver_amount}", date_time.strftime("%d/%m/%Y, %H:%M:%S")))
+        user.add_coin_transaction_list(CoinTransaction(payment.name, price, f"+{golden_amount}", f"+{silver_amount}", date_time.strftime("%d/%m/%Y, %H:%M:%S")))
         
     def buy_coin(self, username, payment, code, golden_amount):
         price = golden_amount
@@ -278,11 +278,11 @@ class Controller:
         
     # รับ username มาด้วยดีมั้ย แล้วเพิ่มpaymentmethodไว้ในuserแต่ละคน  
     def create_payment_method(self, payment_method_name, payment_info):
-        if payment_method_name == self.__payment_list[0].name:
+        if payment_method_name == self.__payment_list[0]:
             return OnlineBanking(payment_info)
-        elif payment_method_name == self.__payment_list[1].name:
+        elif payment_method_name == self.__payment_list[1]:
             return DebitCard(payment_info)
-        elif payment_method_name == self.__payment_list[2].name:
+        elif payment_method_name == self.__payment_list[2]:
             return TrueMoneyWallet(payment_info)
             
     def edit_book_info(self, name, add_tag_list, delete_tag_list, status, age_restricted, prologue):
