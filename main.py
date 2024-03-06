@@ -72,7 +72,10 @@ def get_my_coin(username:str):
     user = Controller.get_user_by_username(username)
     return {"Golden Coin balance" : user.golden_coin.balance, "Silver Coin balance" : user.show_silver_coin_list()}
 
-
+@app.post("/post_payment_method", tags=['Payment'])
+def buy_coin(username:str, payment_method_name:str, payment_info:str, code:str, golden_coin_amount:int):
+    payment = Controller.create_payment_method(payment_method_name, payment_info)  
+    return Controller.buy_coin(username, payment, code, golden_coin_amount)  
 
 
 

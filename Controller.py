@@ -1,4 +1,7 @@
 import CoinTransaction
+from Payment import OnlineBanking
+from Payment import TrueMoneyWallet
+from Payment import DebitCard
 
 from dateutil import relativedelta
 from datetime import datetime, date, timedelta
@@ -99,7 +102,16 @@ class Controller:
             print("Not applying any code")
             
         self.add_coin_to_user(user, payment, golden_amount, silver_amount, price)
-            
+    
+    # รับ username มาด้วยดีมั้ย แล้วเพิ่มpaymentmethodไว้ในuserแต่ละคน  
+    def create_payment_method(self, payment_method_name, payment_info):
+        if payment_method_name == OnlineBanking.name:
+            return OnlineBanking(payment_info)
+        elif payment_method_name == TrueMoneyWallet.name:
+             return TrueMoneyWallet(payment_info)
+        elif payment_method_name == DebitCard.name:
+             return DebitCard(payment_info)
+                 
     @property
     def report_type_list(self):
         return self.__report_type_list
