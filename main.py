@@ -10,6 +10,9 @@ from Reader import Writer
 from Controller import Controller
 
 from datetime import datetime, date, timedelta
+from typing import Optional
+from fastapi import FastAPI
+import uvicorn
 
 Controller = Controller()
 
@@ -35,17 +38,10 @@ Controller.add_promotion(book_sale)
 
 free_coin = CoinPromotion("01/01/2021", 40, "chakeawaroi")
 
-# print(WriteARead.search_book_by_name("Shin_chan"))
 #=====================================================================================================
 now = datetime.now()
-
-
 Controller.buy_coin("Pinttttt", (TrueMoneyWallet("0123456789")), None, 5000)
 Controller.buy_coin("Pinttttt", (OnlineBanking("0123456789")), None, 100)
-
-from typing import Optional
-from fastapi import FastAPI
-import uvicorn
 
 app = FastAPI()
 
@@ -74,8 +70,7 @@ def get_coin_transaction(username:str):
 @app.get("/get_my_coin", tags=['My Coin'])
 def get_my_coin(username:str):
     user = Controller.get_user_by_username(username)
-    return {"Golden Coin balance" : user.show_my_coin_list[0], "Silver Coin balance" : user.show_my_coin_list[1]}
-
+    return {"Golden Coin balance" : user.golden_coin.balance, "Silver Coin balance" : user.show_silver_coin_list()}
 
 
 

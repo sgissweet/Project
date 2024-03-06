@@ -66,16 +66,11 @@ class Reader:
                 self.__silver_coin_list.remove(silver_coin)
                 break
     
-    def show_coin_list(self):
-        my_coin_list = []
+    def show_silver_coin_list(self):
         silver_coin_balance = 0
         for silver_coin in self.__silver_coin_list:
             silver_coin_balance += silver_coin.balance
-            
-        my_coin_list.append(self.__golden_coin.balance)
-        my_coin_list.append(silver_coin_balance)
-        
-        return my_coin_list
+        return silver_coin_balance
             
     def show_coin_transaction(self):
         show_list = []

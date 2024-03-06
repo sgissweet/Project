@@ -8,12 +8,9 @@ from datetime import datetime, date, timedelta
 
 class PaymentMethod:
     def __init__(self):
-        self.__name = None
+        self.__name = ""
         self.__coin_promotion = []
     #=================================
-    @property
-    def name(self):
-        return self.__name
     @property
     def coin_promotion(self):
         return self.__coin_promotion
@@ -38,6 +35,9 @@ class OnlineBanking(PaymentMethod):
         self.__account_id = account_id
     #==================================
     @property
+    def name(self):
+        return self.__name
+    @property
     def account_id(self):
         return self.__account_id
     #==================================method
@@ -53,11 +53,8 @@ class DebitCard(PaymentMethod):
         self.__card_id = card_id
     #==================================
     @property
-    def card_id(self):
-        return self.__card_id
-    @property
-    def card_id(self):
-        return self.__card_id
+    def name(self):
+        return self.__name
     @property
     def card_id(self):
         return self.__card_id
@@ -73,6 +70,9 @@ class TrueMoneyWallet(PaymentMethod):
         self.__name = 'TrueMoney Wallet'
         self.__phone_number = phone_number
     #==================================
+    @property
+    def name(self):
+        return self.__name
     @property
     def phone_number(self):
         return self.__phone_number
