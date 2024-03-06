@@ -9,6 +9,7 @@ from datetime import datetime, date, timedelta
 from typing import Optional, Annotated
 from fastapi import FastAPI, Query
 import uvicorn
+from pydantic import BaseModel
 
 WriteARead = Controller()
 
@@ -46,23 +47,6 @@ WriteARead.add_promotion(promotion_11_11)
 
 app = FastAPI()
 
-@app.get("/signup", tags=['Sign up'])
-def SignUp(username:str, password:str, birth_date: str):
-    new_reader = Reader(username,password,birth_date)
-    if isinstance(new_reader, Reader)==True:
-        WriteARead.add_reader(new_reader)
-        return {"User": "sign up success"}
-    else : 
-        return {"User": "please try again"}
-
-@app.get("/bookname", tags=['Search'])
-def searchBook(book_name:str):
-    return {"Book": WriteARead.search_book_by_name(book_name)}
-
-@app.get("/username", tags=['Search'])
-def SearchUser(username:str):
-     return {"username": WriteARead.search_user(username)}
-
 @app.get("/get_coin_transaction", tags=['Coin Transaction'])
 def get_coin_transaction(username:str):
     user = WriteARead.get_user_by_username(username)
@@ -73,14 +57,21 @@ def get_my_coin(username:str):
     user = WriteARead.get_user_by_username(username)
     return {"Golden Coin balance" : user.golden_coin.balance, "Silver Coin balance" : user.show_silver_coin_list()}
 
+
+
+
 @app.post("/post_payment_method", tags=['Buy Coin'])
 def buy_coin(username:str, golden_coin_amount:int, payment_info: Annotated[str | None, Query(max_length = 10)], payment_method:str = Query("Payment Method", enum = WriteARead.payment_list, description ='Choose your payment method'), code: Optional[str] = None):
     payment = WriteARead.create_payment_method(payment_method, payment_info)
     WriteARead.buy_coin(username, payment, code, golden_coin_amount)  
     return "Purchase successful, THANK YOU"
 
-@app.post("/Buy Chapter", tags=['chapter'])
-def BuyChapter(username:str, chapter_id:str):
-     return {"Buy Chapter" : WriteARead.buy_chapter(username, chapter_id)}
+class dto_buy_chapter(BaseModel):
+    username :str
+    chapter_id : str
+    
+@app.post("/buy_chapter", tags=['chapter'])
+def BuyChapter(dto : dto_buy_chapter):
+     return {"Buy Chapter" : WriteARead.buy_chapter(dto.username,dto.chapter_id)}
 #uvicorn main:app --reload
 
