@@ -278,12 +278,12 @@ class Controller:
         
     # รับ username มาด้วยดีมั้ย แล้วเพิ่มpaymentmethodไว้ในuserแต่ละคน  
     def create_payment_method(self, payment_method_name, payment_info):
-        if payment_method_name == OnlineBanking(None).name:
+        if payment_method_name == self.__payment_list[0].name:
             return OnlineBanking(payment_info)
-        elif payment_method_name == TrueMoneyWallet(None).name:
-            return TrueMoneyWallet(payment_info)
-        elif payment_method_name == DebitCard(None).name:
+        elif payment_method_name == self.__payment_list[1].name:
             return DebitCard(payment_info)
+        elif payment_method_name == self.__payment_list[2].name:
+            return TrueMoneyWallet(payment_info)
             
     def edit_book_info(self, name, add_tag_list, delete_tag_list, status, age_restricted, prologue):
         book = self.get_book_by_name(name)
