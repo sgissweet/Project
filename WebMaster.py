@@ -4,7 +4,9 @@ class Webmaster:
     def __init__(self, username, password):
         self._username = username
         self._password = password
-
+        
+    #============================================property
+    
     @property
     def username(self):
         return self.username
@@ -21,6 +23,8 @@ class Webmaster:
         self.__password = password
         return self.__password
 
+    #==========================================method 
+        
     def check_edits(self, book):
         if book.edited and (datetime.now() - book.counting_date_time).days <= 7:
             return True

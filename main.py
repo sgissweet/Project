@@ -1,12 +1,8 @@
 from Book import Book
 from Chapter import Chapter
-from Payment import TrueMoneyWallet
-from Payment import OnlineBanking
-from Payment import DebitCard
-from Promotion import BookPromotion
-from Promotion import CoinPromotion
-from Reader import Reader
-from Reader import Writer
+from Payment import TrueMoneyWallet, OnlineBanking, DebitCard
+from Promotion import BookPromotion, CoinPromotion
+from Reader import Reader, Writer
 from Controller import Controller
 
 from datetime import datetime, date, timedelta
@@ -19,10 +15,10 @@ Controller = Controller()
 #create temporary instance
 Mo = Writer("Mozaza", "namchakeawpun", "12/05/2000")
 pintt = Reader("Pinttttt", "sawasdee", "01/01/2005")
-Controller.add_writer_to_list(Mo)
-Controller.add_reader_to_list(pintt)
-Controller.add_reader_to_list(Reader("Pangrum", "ehehe", "02/01/2005"))
-Controller.add_reader_to_list(Reader("Jueeen", "whippedcream", "12/11/2004"))
+Controller.add_writer(Mo)
+Controller.add_reader(pintt)
+Controller.add_reader(Reader("Pangrum", "ehehe", "02/01/2005"))
+Controller.add_reader(Reader("Jueeen", "whippedcream", "12/11/2004"))
 
 # Book (self,name,writer,tag_list,status,age_restricted,prologue,date_time):
 Book1 = Book("Shin_chan", Mo, ["kids", "comedy","crime"], "publishing", 7, "shin_chan_prologue", "01/01/2020")
