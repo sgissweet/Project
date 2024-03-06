@@ -9,6 +9,8 @@ class Comment:
       self.__report_list = []
       self.__reply_list = []
 
+    #==============================================property
+    
   @property
   def chapter(self):
       return self.__chapter
@@ -45,3 +47,4 @@ class Comment:
           print(f"Reply is deleted from the list")
       else:
           print(f"Reply is not found in the list")
+          

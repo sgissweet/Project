@@ -3,7 +3,7 @@ from datetime import datetime
 from Report import Report
 from Comment import Comment
 from Chapter import Chapter
-# from Controller import Controller
+
 
 class Book():
     viewer_count = 0

@@ -24,13 +24,6 @@ class SilverCoin(GoldenCoin):
         self.__exp_date_time = datetime.today() + timedelta(days=10)
 
     @property
-    def balance(self):
-        return self.__balance
-    @balance.setter
-    def balance(self,amount):
-        self.__balance -= amount 
-
-    @property
     def exp_date_time(self):
         return self.__exp_date_time
 

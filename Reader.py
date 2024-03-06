@@ -4,6 +4,7 @@ from Book import Book
 from Coin import GoldenCoin, SilverCoin
 from ChapterTransaction import ChapterTransaction
 from CoinTransaction import CoinTransaction
+from Payment import OnlineBanking, DebitCard, TrueMoneyWallet
 
 from datetime import datetime, date, timedelta
 from dateutil import relativedelta
@@ -42,7 +43,7 @@ class Reader:
     @property
     def password(self):
         return self.__password
-    @username.setter
+    @password.setter
     def password(self,password):
         self.__password = password
 
@@ -66,7 +67,7 @@ class Reader:
     def silver_coin_list(self):
         return self.__silver_coin_list
     def add_silver_coin(self, amount):
-        self.__silver_coin.append(SilverCoin(amount))
+        self.__silver_coin_list.append(SilverCoin(amount))
     
     @property
     def introduction(self):
@@ -79,7 +80,7 @@ class Reader:
     def book_shelf_list(self):
         return self.__book_shelf_list
     def add_book_shelf_list(self, book):
-        if isinstance(book,Book):
+        if isinstance(book, Book):
             self.__book_shelf_list.append(book)
         
     @property
@@ -102,8 +103,8 @@ class Reader:
     def add_coin_transaction_list(self,coin_transaction):
         if isinstance(coin_transaction,CoinTransaction):
             self.__coin_transaction_list.append(coin_transaction)   
-        
-    #=========================================================method
+       
+    #=========================================================method 
     
     #jueen
     def get_user_coin_balance(self):
@@ -156,7 +157,11 @@ class Reader:
             silver_amount = coin_transaction.silver_amount
             price = coin_transaction.price
             date_time = coin_transaction.date_time
-            show_list.append(f"{payment_type} +{golden_amount}_golden_coin +{silver_amount}_silver_coin -{price} baht at {date_time}")
+            if(payment_type != None):
+                show_list.append(f"{payment_type} {golden_amount}_golden_coin +{silver_amount}_silver_coin -{price} baht at {date_time}")
+            else:
+                show_list.append(f"{golden_amount}_golden_coin +{silver_amount}_silver_coin at {date_time}")
+            
         return show_list
 
 
@@ -173,7 +178,7 @@ class Writer(Reader):
     def writing_list(self):
         return self.__writing_book_list
     def add_writing_book_list(self,book):
-        if isinstance(book,Book.Book):
+        if isinstance(book, Book):
             self.__writing_book_list.append(book)
     
     @property

@@ -1,19 +1,10 @@
-from Reader import Reader
-from Reader import Reader
-from Controller import Controller
-from CoinTransaction import CoinTransaction
-
-from dateutil import relativedelta
-from datetime import datetime, date, timedelta
-
 class PaymentMethod:
     def __init__(self):
-        self.__name = ""
-        self.__coin_promotion = []
+        self.__name = "hi"
     #=================================
     @property
-    def coin_promotion(self):
-        return self.__coin_promotion
+    def name(self):
+        return self.__name
     #==================================method   
     # def buy_coin(self, username, price):
     #     silver_amount = int(price * 10 / 100)
@@ -44,7 +35,7 @@ class OnlineBanking(PaymentMethod):
     def buy_coin(self, price):
         print("The system is implemented Please wait for the confirmation of the service")
         print(f"The system is sending a bill to account number {self.__account_id} total {price} baht")
-        print("Purchase successful, THANK YOU")
+        # print("Purchase successful, THANK YOU")
         
     
 class DebitCard(PaymentMethod):
@@ -62,7 +53,7 @@ class DebitCard(PaymentMethod):
     def buy_coin(self, price):
         print("The system is implemented Please wait for the confirmation of the service")
         print(f"The system will deduct money from the card number {self.__card_id} total {price} baht")
-        print("Purchase successful, THANK YOU")
+        # print("Purchase successful, THANK YOU")
     
 
 class TrueMoneyWallet(PaymentMethod):
@@ -81,4 +72,4 @@ class TrueMoneyWallet(PaymentMethod):
         print("The system is implemented Please wait for the confirmation of the service")
         print(f"Total {price} baht")
         print(f"An  number will be sent to phone number {self.__phone_number} in a moment")
-        print("Purchase successful, THANK YOU")
+        # print("Purchase successful, THANK YOU")

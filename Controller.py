@@ -1,8 +1,9 @@
-import CoinTransaction
+from CoinTransaction import CoinTransaction
+from Promotion import CoinPromotion, BookPromotion
 from Book import Book
 from Chapter import Chapter
 from Comment import Comment
-from ChapterTransaction import ChapterTransaction
+# from ChapterTransaction import ChapterTransaction
 from Reader import Reader, Writer
 from Payment import OnlineBanking, TrueMoneyWallet, DebitCard
 
@@ -29,6 +30,9 @@ class Controller:
     @property
     def writer_list(self):
         return self.__writer_list
+    @property
+    def payment_list(self):
+        return self.__payment_list
     
     def add_reader(self, reader):
         self.__reader_list.append(reader)
@@ -60,7 +64,11 @@ class Controller:
                     return book
     
     def search_coin_promotion(self, code):
-        pass
+        if(code != None):
+            for promotion in self.__promotion_list:
+                if isinstance(promotion, CoinPromotion) and promotion.code == code:
+                    return promotion  
+        else: return None        
     
     def search_user_list_by_name(self, username):
         search_list = []
@@ -94,6 +102,7 @@ class Controller:
                 for chapter in book.chapter_list:
                     if chapter.chapter_id == chapter_id:
                         return chapter
+                    
         return "Not found"
                     
     # def check_report_count(self, book, webmaster):
@@ -122,18 +131,18 @@ class Controller:
         date_time = datetime.now()
         user.add_golden_coin(golden_amount)
         user.add_silver_coin(silver_amount)
-        user.add_coin_transaction_list(CoinTransaction.CoinTransaction(payment, price, [golden_amount, silver_amount], date_time.strftime("%d/%m/%Y, %H:%M:%S")))
+        user.add_coin_transaction_list(CoinTransaction(payment, price, golden_amount, silver_amount, date_time.strftime("%d/%m/%Y, %H:%M:%S")))
         
     def buy_coin(self, username, payment, code, golden_amount):
         price = golden_amount
         silver_amount = int(golden_amount * 10 / 100)
         user = self.get_user_by_username(username)
-        if(code != None):
-            coin_promotion = self.search_coin_promotion(code)
-            if coin_promotion in payment.__coin_promotion:
-                print("Applying code")
-                price = (100 - coin_promotion.discount) / 100 * price #ลดราคา 
-            else:
+        coin_promotion = self.search_coin_promotion(code)
+        
+        if(code != None and coin_promotion != None):
+            print("Applying code")
+            price = (100 - coin_promotion.discount) / 100 * price #ลดราคา 
+        elif(coin_promotion != None):
                 return "Your code is expired or not exist"
         else:
             print("Not applying any code")
@@ -266,13 +275,14 @@ class Controller:
             return {"Comment": "create comment success"}
         else : 
             return {"Comment": "please try again"}
+        
     # รับ username มาด้วยดีมั้ย แล้วเพิ่มpaymentmethodไว้ในuserแต่ละคน  
     def create_payment_method(self, payment_method_name, payment_info):
-        if payment_method_name == OnlineBanking.name:
+        if payment_method_name == OnlineBanking(None).name:
             return OnlineBanking(payment_info)
-        elif payment_method_name == TrueMoneyWallet.name:
+        elif payment_method_name == TrueMoneyWallet(None).name:
             return TrueMoneyWallet(payment_info)
-        elif payment_method_name == DebitCard.name:
+        elif payment_method_name == DebitCard(None).name:
             return DebitCard(payment_info)
             
     def edit_book_info(self, name, add_tag_list, delete_tag_list, status, age_restricted, prologue):
