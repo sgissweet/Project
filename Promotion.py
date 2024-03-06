@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from Book import Book
+import Book
 
 class Promotion():
     def __init__(self, start_date_time, discount):
