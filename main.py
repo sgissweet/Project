@@ -57,21 +57,25 @@ def get_my_coin(username:str):
     user = WriteARead.get_user_by_username(username)
     return {"Golden Coin balance" : user.golden_coin.balance, "Silver Coin balance" : user.show_silver_coin_list()}
 
+class dto_buy_coin(BaseModel):
+    username : str
+    golden_coin_amount : int
+    payment_info : str
+    payment_method : str 
+    code: Optional[str] = None
 
-
-
-@app.post("/post_payment_method", tags=['Buy Coin'])
-def buy_coin(username:str, golden_coin_amount:int, payment_info: Annotated[str | None, Query(max_length = 10)], payment_method:str = Query("Payment Method", enum = WriteARead.payment_list, description ='Choose your payment method'), code: Optional[str] = None):
-    payment = WriteARead.create_payment_method(payment_method, payment_info)
-    WriteARead.buy_coin(username, payment, code, golden_coin_amount)  
+@app.post("/buy_coin", tags=['Buy Coin'])
+def buy_coin(dto : dto_buy_coin):
+    payment = WriteARead.create_payment_method(dto.payment_method, dto.payment_info)
+    WriteARead.buy_coin(dto.username, payment, dto.code, dto.golden_coin_amount)  
     return "Purchase successful, THANK YOU"
 
-class dto_buy_chapter(BaseModel):
-    username :str
-    chapter_id : str
+# class dto_buy_chapter(BaseModel):
+#     username :str
+#     chapter_id : str
     
-@app.post("/buy_chapter", tags=['chapter'])
-def BuyChapter(dto : dto_buy_chapter):
-     return {"Buy Chapter" : WriteARead.buy_chapter(dto.username,dto.chapter_id)}
+# @app.post("/buy_chapter", tags=['chapter'])
+# def BuyChapter(dto : dto_buy_chapter):
+#      return {"Buy Chapter" : WriteARead.buy_chapter(dto.username,dto.chapter_id)}
 #uvicorn main:app --reload
 
