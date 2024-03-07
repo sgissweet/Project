@@ -131,7 +131,7 @@ class Controller:
         date_time = datetime.now()
         user.add_golden_coin(golden_amount)
         user.add_silver_coin(silver_amount)
-        user.add_coin_transaction_list(CoinTransaction(payment.name, price, f"+{golden_amount}", f"+{silver_amount}", date_time.strftime("%d/%m/%Y, %H:%M:%S")))
+        user.add_coin_transaction_list(CoinTransaction(payment, price, f"+{golden_amount}", f"+{silver_amount}", date_time.strftime("%d/%m/%Y, %H:%M:%S")))
         
     def buy_coin(self, username, payment, code, golden_amount):
         price = golden_amount
