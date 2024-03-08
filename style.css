@@ -45,13 +45,11 @@ html, body {
     width: 50px;
 }
 
-.payment_box {
+.payment_img {
     /* color:rgb(73, 72, 72); */
     background-color: rgba(75, 73, 73, 0.493);
     padding: 0.7px;
     margin-left: 20px;
-    /* text-align: center;
-    text-decoration: none; */
     margin-bottom: 10px;
     display: inline-block;
     width: 200px;
