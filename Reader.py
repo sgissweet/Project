@@ -167,7 +167,7 @@ class Reader:
                     show_list.append(f"{payment_type} {golden_amount}_golden_coin {silver_amount}_silver_coin at {date_time}")
             else:    
                 payment_type = coin_transaction.payment.name
-                show_list.append(f"{payment_type} {golden_amount}_golden_coin {silver_amount}_silver_coin at {date_time}")
+                show_list.append(f"{payment_type} -{price}baht {golden_amount}_golden_coin {silver_amount}_silver_coin at {date_time}")
             
         return show_list
 
