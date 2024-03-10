@@ -1,6 +1,7 @@
 <!DOCTYPE html>
+<html>
     <head>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/style/style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -11,43 +12,93 @@
     </head>
     <body>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script type="module" src="script.js"></script>
+        <script type="module" src="/script/script.js"></script>
         
         <header class="top_header"> 
-            <a class="menu_item brand" href="homepage.html">WriteARead</a>
-            <a class="menu_item" href="homepage.html">Home</a>
+            <a class="menu_item brand" href="homepage.html"><img class="brand_img" src="/assets/writearead_img/WriteARead_white.png"></a>
+            <!-- <a class="menu_item" href="homepage.html">Home</a> -->
         </header>
 
-        <h1 class="payment_title">เติมเหรียญ</h1>
+        <h1 class="first_payment_title">เติมเหรียญ</h1>
         
         <div>
             <h1 class="payment_title">เลือกช่องทางชำระเงิน</h1>
-            <a href="#"> <img class="payment_img" src="image/onlinebanking.png"></a>
-            <a href="#"> <img class="payment_img" src="image/debitcard.png"></a>
-            <a href="#"> <img class="payment_img" src="image/truemoneywallet.png"></a>
+           
+            <button class="payment_button" id="online_banking"><img class="payment_img" src="/assets/payment_img/onlinebanking.png"></button>
+            <button class="payment_button" id="debit_card"><img class="payment_img" src="/assets/payment_img/debitcard.png"></button>
+            <button class="payment_button" id="truemoney_wallet"><img class="payment_img" src="/assets/payment_img/truemoneywallet.png"></button>
+
+            <!-- <div class="payment_box">
+                <a href="#"> <img class="payment_img" src="/assets/payment_img/onlinebanking.png"></a>
+            </div>
+            
+            <div class="payment_box">
+                <a href="#"> <img class="payment_img" src="/assets/payment_img/debitcard.png"></a>
+            </div>
+            <div class="payment_box">
+                <a href="#"> <img class="payment_img" src="/assets/payment_img/truemoneywallet.png"></a>
+            </div> -->   
         </div>
 
         <div>
             <h1 class="payment_title">กรุณาเลือกจำนวนเหรียญที่ต้องการ</h1>
-            <div>
-                <a href="#">กำหนดเอง</a>
-            </div>     
-        
-            <!-- <a href="#"> <img class="coin_img" src="image/50coin.png"></a>
-            <a href="#"> <img class="coin_img" src="image/100coin.png"></a>
-            <a href="#"> <img class="coin_img" src="image/250coin.png"></a>
-            <a href="#"> <img class="coin_img" src="image/500coin.png"></a> -->
 
+            <div class="coin_box">
+                <img class="coin_img" src="/assets/payment_img/20coin.png">
+                <p class="coin_amount">20</p>
+                <p class="unit">   เหรียญ</p>
+                <p class="coin_cost">20 บาท</p>
+            </div>
+
+            <div class="coin_box">
+                <img class="coin_img" src="/assets/payment_img/50coin.png">
+                <p class="coin_amount">50</p>
+                <p class="unit">   เหรียญ</p>
+                <p class="coin_cost">50 บาท</p>
+            </div>
+
+            <div class="coin_box">
+                <img class="coin_img" src="/assets/payment_img/100coin.png">
+                <p class="coin_amount">100</p>
+                <p class="unit">   เหรียญ</p>
+                <p class="coin_cost">100 บาท</p>
+            </div>
+
+            <div class="coin_box">
+                <img class="coin_img" src="/assets/payment_img/500coin.png">
+                <p class="coin_amount">500</p>
+                <p class="unit">   เหรียญ</p>
+                <p class="coin_cost">500 บาท</p>
+            </div>
+
+            <div class="coin_box">
+                <p class="costomize_text">กำหนดเอง</p>
+                <input class="costomize_input" type="number" id="golden_coin_amount" name="golden_coin_amount" placeholder="0" min="1" max="1000000">
+                <span class="costomize_unit">เหรียญ</span>
+            </div>
         </div>
-            <form >
-                <input id="username" type="text" placeholder="View">
-                <button onclick="show_coin_transaction()" type="submit">View</button>
+
+        <div class="promotion_box">
+            <h1 class="payment_title">Promotion Code :</h1>
+            <form>
+                <input class="promotion_code" type="text" id="promotion_code" name="promotion_code" placeholder="Code">
+                <!-- <button></button> -->
             </form>
+        </div>
 
         <div>
-
+            <p>มูลค่ารวม : </p>
+            <p>บาท</p>
+            <p>จำนวนเหรียญทอง </p>
+            <p>เหรียญทอง</p>
         </div>
 
+        <div class="final_button">
+            <button class="cancel_button" id="cancel">ยกเลิก</button>
+            <button class="submit_button" id="submit">ยืนยัน</button>
+        </div>
+
+    
         <footer class="bottom_footer">
             <a class="menu_item" href="https://www.readawrite.com/">ReadAWrite</a>
             <a class="menu_item" href="https://www.mareads.com/my-coin/payment">Ref from MaReads</a>
@@ -55,6 +106,4 @@
         </footer>
 
     </body>
-
-
 </html>

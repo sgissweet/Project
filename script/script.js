@@ -1,19 +1,25 @@
-// import axios from "axios";
+const payment_data = {};
 
-async function show_coin_transaction(){
-    const input = document.getElementById("username").value;
-    const content = document.getElementById("content");
-    console.log(input);
+payment_data.username = "Mozaza"
 
-    const response = await axios.get(`http://127.0.0.1:8000/get_coin_transaction?username=${input}`);
-    
-    console.log(response.data);
+document.getElementById('online_banking').addEventListener('click', function() {
+    payment_data.payment_method = "OnlineBanking";
+    console.log(payment_data.payment_method);
+});
 
-    // const coin_transaction_list = response.data.coin_transaction_list;//
+document.getElementById('debit_card').addEventListener('click', function() {
+    payment_data.payment_method = "CreditCard";
+    console.log(payment_data.payment_method);
+});
 
-    // for(let i = 0; i < coin_transaction_list.lenght; i++) {
-    //     content.innerHTML += `<p> ${coin_transaction_list[i]}</p>`;
-    // }
+document.getElementById('truemoney_wallet').addEventListener('click', function() {
+    payment_data.payment_method = "TrueMoneyWallet";
+    console.log(payment_data.payment_method);
+});
+
+payment_data.golden_coin_amount = document.getElementById("golden_coin_amount").value;
+// console.log(payment_data);
 
 
-}
+
+

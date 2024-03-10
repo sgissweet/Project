@@ -176,58 +176,56 @@ class Writer(Reader):
     money_balance = 0
     def __init__(self,username,password,birth_date):
         super().__init__(username,password,birth_date)
-        self.__writing_book_list = []
-        self.__pseudonym = []
-    
-    #=================================================property
+        self.__writing_list = []
+        self.__pseudonym_list = []
     
     @property
     def writing_list(self):
-        return self.__writing_book_list
-    def add_writing_book_list(self,book):
-        if isinstance(book, Book):
-            self.__writing_book_list.append(book)
+        return self.__writing_list
+    
+    def add_writing_list(self,book):
+        if isinstance(book,Book):
+            self.__writing_list.append(book)
     
     @property
     def pseudonym_list(self):
-        return self.__pseudonym
+        return self.__pseudonym_list
+    
     def add_pseudonym(self, pseudonym):
-        self.__pseudonym.append(pseudonym)
-        
+        self.__pseudonym_list.append(pseudonym)
+    
     @property
     def viewer_count(self):
         count = 0
-        for book in self.__writing_book_list:
-            for chapter in book.get_chapter_list():
+        for book in self.__writing_list:
+            for chapter in book.chapter_list:
                 count += chapter.viewer_count
         return count
     
     @property
     def comment_list(self):
         comment_list = []
-        for book in self.__writing_book_list:
-            comment_list.append(book.get_comment_list())
+        for book in self.__writing_list:
+            comment_list.append(book.comment_list())
         return comment_list
     
-    @property
-    def json_comment_list(self):
+    def show_comment_list(self):
         comment_list = []
-        for book in self.__writing_book_list:
-            for comment in book.get_comment_list():
-                comment_dict = {}
-                comment_dict["user"] = comment.commentator.name
-                comment_dict["context"] = comment.context
-                comment_dict["chapter"] = f"#{comment.chapter.chapter_number} : {comment.chapter.name}"
-                comment_dict["date_time"] = comment.publish_date_time
-                comment_list.append(comment_dict)
+        for book in self.__writing_list:
+            for comment in book.comment_list:
+                comment_list.append(comment.show_comment())
         return comment_list
-        
-    #===================================================method
     
-    def get_writing_name_list(self):
+    def show_writing_name_list(self):
         writing_name_list = []
-        for book in self.__writing_book_list:
+        for book in self.__writing_list:
             writing_name_list.append(book.name)
-        return writing_name_list 
+        return writing_name_list
+    
+    def check_repeated_pseudonym(self, new_pseudonym):
+        for pseudonym in self.__pseudonym_list:
+            if pseudonym.lower() == new_pseudonym.lower():
+                return True
+        return False
     
     

@@ -28,10 +28,14 @@ write_a_read.add_reader(Reader("Pangrum", "ehehe", "02/01/2005"))
 write_a_read.add_reader(Reader("Jueeen", "whippedcream", "12/11/2004"))
 
 # Book (self,name,writer,tag_list,status,age_restricted,prologue,date_time):
-Book1 = Book("Shin_chan", Mo, ["kids", "comedy","crime"], "publishing", 7, "shin_chan_prologue")
-Book2 = Book("Shinosuke", Mo, ["kids", "comedy","crime"], "publishing", 7, "shin_chan_prologue")
-Mo.add_writing_book_list(Book1)
-Mo.add_writing_book_list(Book2)
+# Book1 = Book("Shin_chan","eiei", Mo, ["kids", "comedy","crime"], "publishing", 7, "shin_chan_prologue")
+# Book2 = Book("Shinosuke", Mo, ["kids", "comedy","crime"], "publishing", 7, "shin_chan_prologue")
+book1 = Book("Shin_chan", "Mola", Mo, ["kids", "comedy","crime"], "publishing", 7, "Shin Chan is a 50-year-old boy")
+# Mo.add_writing_list(book1)
+# Mo.add_writing_book_list(book1)
+Mo.add_writing_list(book1)
+# print(book1.pseudonym)
+# Mo.add_writing_book_list(book2)
 
 #chapter_number, name, context, date_time, cost):
 Chapter1_1 = Chapter("1", "first chapter of shinchan", "this is the first chapter of shinchan", "01/01/2020", 5)

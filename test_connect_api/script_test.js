@@ -15,7 +15,6 @@ async function test() {
         for(let i = 0; i < coin_transaction.length; i++) {
             console.log(coin_transaction[i]);
             content.innerHTML += `<div><p> ${coin_transaction[i]} </p></div>`;
-
         }
     } else { 
         console.log("No coin transaction data available");
