@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Payment</title>
+    </head>
+    <body>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script type="module" src="script.js"></script>
+        
+        <header class="top_header"> 
+            <a class="menu_item brand" href="homepage.html">WriteARead</a>
+            <a class="menu_item" href="homepage.html">Home</a>
+        </header>
+
+        <h1 class="payment_title">เติมเหรียญ</h1>
+        
+        <div>
+            <h1 class="payment_title">เลือกช่องทางชำระเงิน</h1>
+            <a href="#"> <img class="payment_img" src="image/onlinebanking.png"></a>
+            <a href="#"> <img class="payment_img" src="image/debitcard.png"></a>
+            <a href="#"> <img class="payment_img" src="image/truemoneywallet.png"></a>
+        </div>
+
+        <div>
+            <h1 class="payment_title">กรุณาเลือกจำนวนเหรียญที่ต้องการ</h1>
+            <div>
+                <a href="#">กำหนดเอง</a>
+            </div>     
+        
+            <!-- <a href="#"> <img class="coin_img" src="image/50coin.png"></a>
+            <a href="#"> <img class="coin_img" src="image/100coin.png"></a>
+            <a href="#"> <img class="coin_img" src="image/250coin.png"></a>
+            <a href="#"> <img class="coin_img" src="image/500coin.png"></a> -->
+
+        </div>
+            <form >
+                <input id="username" type="text" placeholder="View">
+                <button onclick="show_coin_transaction()" type="submit">View</button>
+            </form>
+
+        <div>
+
+        </div>
+
+        <footer class="bottom_footer">
+            <a class="menu_item" href="https://www.readawrite.com/">ReadAWrite</a>
+            <a class="menu_item" href="https://www.mareads.com/my-coin/payment">Ref from MaReads</a>
+            <p class="bottom_context">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
+        </footer>
+
+    </body>
+
+
+</html>
