@@ -12,8 +12,7 @@
 
     </head>
     <body>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script type="module" src="/script/payment_script.js"></script>
+        
         
         <header class="top_header"> 
             <a class="menu_item brand" href="homepage.html"><img class="brand_img" src="/assets/writearead_img/WriteARead_white.png"></a>
@@ -89,15 +88,17 @@
         </div>
 
         <div class="final_button">
-            <button class="cancel_button" id="cancel">ยกเลิก</button>
-            <button class="submit_button" onclick="" id="submit">ยืนยัน</button>
+            <button class="cancel_button" onclick="cancel_button()" type="submit">ยกเลิก</button>
+            <button class="submit_button" onclick="submit_button()" type="submit">ยืนยัน</button> 
         </div>
-    
+        
         <footer class="bottom_footer">
             <a class="menu_item" href="https://www.readawrite.com/">ReadAWrite</a>
             <a class="menu_item" href="https://www.mareads.com/my-coin/payment">Ref from MaReads</a>
             <p class="bottom_context">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
         </footer>
 
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/script/payment_script.js"></script>
     </body>
 </html>

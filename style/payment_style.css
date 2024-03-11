@@ -76,6 +76,7 @@ html, body {
 
 .payment_img {
     width: 200px;
+    border-radius: 8px;
 }
 
 .payment_button {
@@ -194,6 +195,12 @@ html, body {
     width: 200px; 
     margin-left: 20px;
     margin-bottom: 35px;
+    outline: none;
+}
+
+.promotion_code:focus {
+    border: 2px solid rgb(0, 203, 195); 
+    /* border-color: rgb(0, 203, 195); */
 }
 
 .final_button {
@@ -232,10 +239,12 @@ html, body {
     border: 1px solid rgb(0, 203, 195);
     border-radius: 50px;
     width: 300px;
-    
+    cursor: pointer;
 }
 
 .bottom_footer {
+    margin: auto;
+    text-align: center;
     background-color: rgb(134, 140, 141);
 }
 

@@ -68,22 +68,10 @@ document.getElementById('coin_box_click_costom').addEventListener('click', funct
 });
 
 
-payment_data.code = document.getElementById('promotion_code').value;
-console.log(payment_data.code);
-
-// submit
-async function submit() {
+function submit_button() {
+    payment_data.code = document.getElementById('promotion_code').value;
     console.log(payment_data);
-
-    // const response = await axios.post(`http://127.0.0.1:8000/get_coin_transaction?username=${input}`);
-    // console.log(response.data);
-    
-}
-
-
-
-
-
-
+    // Your additional logic here
+  }
 
 
