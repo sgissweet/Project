@@ -9,6 +9,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Payment</title>
+
     </head>
     <body>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -27,51 +28,41 @@
             <button class="payment_button" id="online_banking"><img class="payment_img" src="/assets/payment_img/onlinebanking.png"></button>
             <button class="payment_button" id="debit_card"><img class="payment_img" src="/assets/payment_img/debitcard.png"></button>
             <button class="payment_button" id="truemoney_wallet"><img class="payment_img" src="/assets/payment_img/truemoneywallet.png"></button>
-
-            <!-- <div class="payment_box">
-                <a href="#"> <img class="payment_img" src="/assets/payment_img/onlinebanking.png"></a>
-            </div>
-            
-            <div class="payment_box">
-                <a href="#"> <img class="payment_img" src="/assets/payment_img/debitcard.png"></a>
-            </div>
-            <div class="payment_box">
-                <a href="#"> <img class="payment_img" src="/assets/payment_img/truemoneywallet.png"></a>
-            </div> -->   
+ 
         </div>
 
         <div>
             <h1 class="payment_title">กรุณาเลือกจำนวนเหรียญที่ต้องการ</h1>
 
-            <div class="coin_box">
+            <div class="coin_box" id="coin_box_click_20">
                 <img class="coin_img" src="/assets/payment_img/20coin.png">
                 <p class="coin_amount">20</p>
                 <p class="unit">   เหรียญ</p>
                 <p class="coin_cost">20 บาท</p>
             </div>
 
-            <div class="coin_box">
+            <div class="coin_box" id="coin_box_click_50">
                 <img class="coin_img" src="/assets/payment_img/50coin.png">
                 <p class="coin_amount">50</p>
                 <p class="unit">   เหรียญ</p>
                 <p class="coin_cost">50 บาท</p>
             </div>
 
-            <div class="coin_box">
+            <div class="coin_box" id="coin_box_click_100">
                 <img class="coin_img" src="/assets/payment_img/100coin.png">
                 <p class="coin_amount">100</p>
                 <p class="unit">   เหรียญ</p>
                 <p class="coin_cost">100 บาท</p>
             </div>
 
-            <div class="coin_box">
+            <div class="coin_box" id="coin_box_click_500">
                 <img class="coin_img" src="/assets/payment_img/500coin.png">
                 <p class="coin_amount">500</p>
                 <p class="unit">   เหรียญ</p>
                 <p class="coin_cost">500 บาท</p>
             </div>
 
-            <div class="coin_box">
+            <div class="coin_box" id="coin_box_click_costom">
                 <p class="costomize_text">กำหนดเอง</p>
                 <input class="costomize_input" type="number" id="golden_coin_amount" name="golden_coin_amount" placeholder="0" min="1" max="1000000">
                 <span class="costomize_unit">เหรียญ</span>
@@ -86,18 +77,21 @@
             </form>
         </div>
 
-        <div>
-            <p>มูลค่ารวม : </p>
-            <p>บาท</p>
-            <p>จำนวนเหรียญทอง </p>
-            <p>เหรียญทอง</p>
+        <div class="final_button">
+            <div class="final_box">
+                <p>มูลค่ารวม : </p>
+                <!-- <p>บาท</p> -->
+            </div>
+            <div class="final_box">
+                <p>จำนวนเหรียญทอง : </p>
+                <!-- <p>เหรียญทอง</p> -->
+            </div>
         </div>
 
         <div class="final_button">
             <button class="cancel_button" id="cancel">ยกเลิก</button>
-            <button class="submit_button" id="submit">ยืนยัน</button>
+            <button class="submit_button" onclick="" id="submit">ยืนยัน</button>
         </div>
-
     
         <footer class="bottom_footer">
             <a class="menu_item" href="https://www.readawrite.com/">ReadAWrite</a>
