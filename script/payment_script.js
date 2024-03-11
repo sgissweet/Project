@@ -8,12 +8,12 @@ document.getElementById('online_banking').addEventListener('click', function() {
 });
 
 document.getElementById('debit_card').addEventListener('click', function() {
-    payment_data.payment_method = "CreditCard";
+    payment_data.payment_method = "Debit Card";
     console.log(payment_data.payment_method);
 });
 
 document.getElementById('truemoney_wallet').addEventListener('click', function() {
-    payment_data.payment_method = "TrueMoneyWallet";
+    payment_data.payment_method = "TrueMoney Wallet";
     console.log(payment_data.payment_method);
 });
 
@@ -67,11 +67,60 @@ document.getElementById('coin_box_click_costom').addEventListener('click', funct
     console.log(payment_data.golden_coin_amount);
 });
 
+info_form = document.getElementById('info_form');
+success_form = document.getElementById('success_form');
 
-function submit_button() {
+function pop_up_info_form() {
     payment_data.code = document.getElementById('promotion_code').value;
+    payment_data.payment_info = document.getElementById('payment_info').value;
     console.log(payment_data);
-    // Your additional logic here
-  }
+
+    info_form.style.display = 'block';
+}
+
+async function pop_up_success_form() {
+    payment_data.code = document.getElementById('promotion_code').value;
+    payment_data.payment_info = document.getElementById('payment_info').value;
+    
+    axios.post("http://127.0.0.1:8000/buy_coin", {
+        "username": payment_data.username,
+        "golden_coin_amount": payment_data.golden_coin_amount,
+        "payment_method": payment_data.payment_method,
+        "payment_info": payment_data.payment_info,
+        "code": payment_data.code
+      })
+      .then((response) => {
+        console.log(response.data);
+
+        const content = document.getElementById("content");
+        content.innerHTML = `<p>${response.data}</p>`;
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+    });
+
+    // const content = document.getElementById("content");
+    // content.innerHTML = `<p>${response.data}</p>`;
 
 
+    // if(response.data) {
+    //     content.innerHTML = <p>response.data</p>;
+    // } else {
+    //     content.innerHTML = <p>something went wrong</p>;
+    // }
+
+    success_form.style.display = 'block';
+    setTimeout(function () {
+        success_form.style.display = 'none';
+        window.location.href = '/page/transaction.html';
+      }, 3000);
+}
+
+
+function cancel_button() {
+    window.location.reload(); 
+}
+
+function pop_all_down() {
+    console.log("yayyy");
+}
