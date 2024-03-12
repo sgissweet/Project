@@ -2,6 +2,8 @@
 <html>
     <head>
         <link rel="stylesheet" href="/style/payment_style.css">
+        <link rel="stylesheet" href="/style/create_chapter.css">
+        <link rel="stylesheet" href="/style/transaction.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,12 +22,12 @@
         </header>
 
         <h1 class="first_payment_title">นิยาย</h1>
-        
-        <form>
+    
+        <!-- <form>
             <label for="img">Select image : </label>
             <input type="file" id="img" name="img" accept="image/*">
             <input type="submit">
-        </form>
+        </form> -->
 
         <div class="">
             <h1 class="payment_title">ชื่อเรื่อง</h1>
@@ -37,10 +39,11 @@
         <div class="">
             <h1 class="payment_title">คำโปรย</h1>
             <form>
-                <input class="promotion_code" type="text" id="prologue" name="prologue" placeholder="เพิ่มคำโปรยสั้น ๆ">
-                <!-- <button></button> -->
+                <!-- <input class="promotion_code" type="text" id="prologue" name="prologue" placeholder="เพิ่มคำโปรยสั้น ๆ"> -->
+                <textarea class="pangprologue_box" id="prologue" name="prologue" rows="4" cols="50" placeholder="ใส่คำโปรยสั้น ๆ" required></textarea>
             </form>
         </div>
+
 
         <div class="">
             <h1 class="payment_title">นามปากกา</h1>
@@ -61,23 +64,23 @@
         <div class="">
             <h1 class="payment_title">จำกัดอายุการเข้าถึง</h1>
             <form>
-                <input type="checkbox" name="age_restricted" value="true">
+                <input class="pangcheck_box" type="checkbox" name="age_restricted" value="true">
                 <label for="age_restricted">age_restricted(18+)</label><br>
             </form>
         </div>
 
         <div class="">
             <h1 class="payment_title">สถานะ</h1>
-            <select name="status" id="status">
+            <select class="pangdrop_down" name="status" id="status">
                 <option value="ongoing">Ongoing</option>
                 <option value="finished">Finished</option>
-                <option value="obscure">Obsure</option>
+                <option value="obscure">Hiding</option>
             </select>
         </div>
 
         <div class="final_button">
             <button class="cancel_button" onclick="cancel_button()" type="submit">ยกเลิก</button>
-            <button class="submit_button" onclick="pop_up_success_form()" type="submit">ยืนยัน</button> 
+            <button class="submit_button" onclick="submit_create_book()" type="submit">ยืนยัน</button> 
         </div>
 
         <!-- pop up2 -->
@@ -95,7 +98,7 @@
         </footer>
 
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="/script/create_chapter.js"></script>
+        <script src="/script/create_book.js"></script>
         
     </body>
 </html>

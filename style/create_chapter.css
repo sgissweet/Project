@@ -69,6 +69,26 @@ html, body {
     border: 2px solid rgb(0, 203, 195); 
 }
 
+.pangprologue_box {
+    font-family: "IBM Plex Sans Thai", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    display: block;
+    border: 1px solid #d7d6d6; 
+    background: #fff; 
+    padding: 10px 10px 10px 20px; 
+    width: 350px; 
+    height: 150px;
+    margin-left: 20px;
+    margin-bottom: 35px;
+    outline: none;
+    text-align: start;
+}
+
+.pangprologue_box:focus {
+    border: 2px solid rgb(0, 203, 195); 
+}
+
 .pangfill_box3 {
     font-family: "IBM Plex Sans Thai", sans-serif;
     font-style: normal;
@@ -94,4 +114,11 @@ html, body {
     /* top: 80px; */
     bottom: 0px; 
     z-index: 12;
+}
+
+.pangcheck_box {
+    font-family: "IBM Plex Sans Thai", sans-serif;
+    margin-left: 20px;
+    font-style: normal;
+    font-weight: 400;
 }
