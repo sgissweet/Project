@@ -5,11 +5,11 @@ from Promotion import BookPromotion, CoinPromotion
 from Reader import Reader, Writer
 from Controller import Controller
 from CoinTransaction import CoinTransaction
+from ChapterTransaction import ChapterTransaction
 
 from datetime import datetime, date, timedelta
 from typing import Optional, Annotated
 from fastapi import FastAPI, Query, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from pydantic import BaseModel
 
@@ -37,8 +37,8 @@ Mo.add_writing_list(book2)
 
 book1.add_chapter_list(Chapter("Shin_chan", "1", "first_ch", "this is the first chapter of shincha", 184))
 
-#chapter_number, name, context, date_time, cost):
-Chapter1_1 = Chapter("1", "first chapter of shinchan", "this is the first chapter of shinchan", "01/01/2020", 5)
+# book_name, chapter_number, chapter_name, context, cost
+Chapter1_1 = Chapter("Shin_chan", 1, "Last of us", "jhahahahhahah", 5)
 
 book_sale = BookPromotion("01/01/2021", 50, [])
 write_a_read.add_promotion(book_sale)
@@ -56,6 +56,8 @@ now = datetime.now()
 
 Mo.add_coin_transaction_list(CoinTransaction(OnlineBanking("0123456789"), 500, "+500", "+50", now))
 Mo.add_coin_transaction_list(CoinTransaction(TrueMoneyWallet("9876543210"), 500, "+500", "+50", now))
+
+Mo.add_chapter_transaction_list(ChapterTransaction(Chapter1_1, 5))
 #=====================================================================================================
 
 app = FastAPI()
@@ -64,6 +66,8 @@ app = FastAPI()
 #      uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
 
 #============================================tangmo
+
+from fastapi.middleware.cors import CORSMiddleware
 origins = [
     "http://localhost:5500",
     "localhost:5500",
@@ -107,13 +111,13 @@ def buy_coin(dto : dto_buy_coin):
 def ShowChapterTransaction(username:str):
      user = write_a_read.get_user_by_username(username)
      if write_a_read.if_user_not_found(user): return user
-     return {"Chapter Transaction" : user.show_chapter_transaction()}
+     return {"Chapter_Transaction" : user.show_chapter_transaction()}
  
 class dto_create_book(BaseModel):
      name:str
      pseudonym:str
      writer_name:str
-     tag_list: str
+     genre: str
      prologue: str
      age_restricted: bool
      status: str 
@@ -122,7 +126,7 @@ class dto_create_book(BaseModel):
 # เพิ่มเก็บชื่อusernameของไร้เต้อ
 @app.post("/book", tags=['Book'])
 def CreateBook(dto : dto_create_book):
-     return write_a_read.create_book(dto.name, dto.pseudonym, dto.writer_name, dto.tag_list, dto.status, dto.age_restricted, dto.prologue)
+     return write_a_read.create_book(dto.name, dto.pseudonym, dto.writer_name, dto.genre, dto.status, dto.age_restricted, dto.prologue)
 
 class dto_create_chapter(BaseModel):
      book_name:str

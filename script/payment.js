@@ -99,16 +99,6 @@ async function pop_up_success_form() {
         console.error("Error:", error);
     });
 
-    // const content = document.getElementById("content");
-    // content.innerHTML = `<p>${response.data}</p>`;
-
-
-    // if(response.data) {
-    //     content.innerHTML = <p>response.data</p>;
-    // } else {
-    //     content.innerHTML = <p>something went wrong</p>;
-    // }
-
     success_form.style.display = 'block';
     setTimeout(function () {
         success_form.style.display = 'none';

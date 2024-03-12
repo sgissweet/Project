@@ -1,60 +1,69 @@
+
 const transaction_data = {};
+
 
 transaction_data.username = "Mozaza"
 
-document.getElementById('online_banking').addEventListener('click', function() {
-    payment_data.payment_method = "OnlineBanking";
-    console.log(payment_data.payment_method);
+document.getElementById('transaction_type').addEventListener('change', function() {
+    const transaction_type = this.value;
+
+    if(transaction_type == 'coin') {
+        console.log("coin");
+        show_coin_transaction();
+    }
+    else if(transaction_type == 'chapter') {
+        console.log("chap");
+        show_chapter_transaction();
+    }
 });
 
+const coin_transaction_box = document.getElementById('coin_transaction_box');
+const chap_transaction_box = document.getElementById('chapter_transaction_box');
 
 async function show_coin_transaction() {
-    payment_data.code = document.getElementById('promotion_code').value;
-    payment_data.payment_info = document.getElementById('payment_info').value;
-    
-    axios.post("http://127.0.0.1:8000/buy_coin", {
-        "username": payment_data.username,
-        "golden_coin_amount": payment_data.golden_coin_amount,
-        "payment_method": payment_data.payment_method,
-        "payment_info": payment_data.payment_info,
-        "code": payment_data.code
-      })
-      .then((response) => {
-        console.log(response.data);
+    const input = transaction_data.username;
+    const response = await axios.get(`http://127.0.0.1:8000/get_coin_transaction?username=${input}`);
+    const content = document.getElementById('return_coin_transaction');
+    content.innerHTML = '';
+    console.log(response.data);
 
-        const content = document.getElementById("content");
-        content.innerHTML = `<p>${response.data}</p>`;
-    })
-    .catch((error) => {
-        console.error("Error:", error);
-    });
+    const coin_transaction = response.data.Coin_Transaction;
 
 
-    // window.location.href = '/page/transaction.html';
+    if(coin_transaction && coin_transaction.length > 0) {
+        for(let i = 0; i < coin_transaction.length; i++) {
+            console.log(coin_transaction[i]);
+            content.innerHTML += `<div><p> ${coin_transaction[i]} </p></div>`;
+        }
+    } else { 
+        console.log("No coin transaction data available");
+        content.innerHTML = `<img src="/assets/transaction_img/not_found_transac.png">`;
+    }
+
+    chap_transaction_box.style.display = 'none';
+    coin_transaction_box.style.display = 'block';
 }
 
-async function show_coin_transaction() {
-    payment_data.code = document.getElementById('promotion_code').value;
-    payment_data.payment_info = document.getElementById('payment_info').value;
-    
-    axios.post("http://127.0.0.1:8000/buy_coin", {
-        "username": payment_data.username,
-        "golden_coin_amount": payment_data.golden_coin_amount,
-        "payment_method": payment_data.payment_method,
-        "payment_info": payment_data.payment_info,
-        "code": payment_data.code
-      })
-      .then((response) => {
-        console.log(response.data);
+async function show_chapter_transaction() {
+    const input = transaction_data.username;
+    const response = await axios.get(`http://127.0.0.1:8000/show_chapter_transaction?username=${input}`);
+    const content = document.getElementById('return_chapter_transaction');
+    content.innerHTML = '';
+    console.log(response.data);
 
-        const content = document.getElementById("content");
-        content.innerHTML = `<p>${response.data}</p>`;
-    })
-    .catch((error) => {
-        console.error("Error:", error);
-    });
+    const chapter_transaction = response.data.Chapter_Transaction;
 
+    if(chapter_transaction && chapter_transaction.length > 0) {
+        for(let i = 0; i < chapter_transaction.length; i++) {
+            console.log(chapter_transaction[i]);
+            content.innerHTML += `<div><p> ${chapter_transaction[i]} </p></div>`;
+        }
+    } else { 
+        console.log("No coin transaction data available");
+        content.innerHTML = `<img src="/assets/transaction_img/not_found_transac.png">`;
+    }
 
-    // window.location.href = '/page/transaction.html';
+    coin_transaction_box.style.display = 'none';
+    chap_transaction_box.style.display = 'block';
 }
 

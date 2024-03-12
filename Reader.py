@@ -170,6 +170,34 @@ class Reader:
                 show_list.append(f"{payment_type} -{price}baht {golden_amount}_golden_coin {silver_amount}_silver_coin at {date_time}")
             
         return show_list
+    
+    def show_chapter_transaction(self):
+        show_list = []
+        for chapter_transaction in self.__chapter_transaction_list:
+            show_list.append(chapter_transaction.chapter_transaction())
+        return show_list
+    
+    def edit_introduction(self, text):
+        if len(text) > 50:
+            return "Introduction cannot be longer than 50 letters"
+        else:
+            self.__introduction = text
+            return "Introduction updated"
+    
+    def check_repeated_purchase(self, chapter):
+        for transaction in self.__chapter_transaction_list:
+            if chapter == transaction.chapter:
+                return True
+        return False
+    
+    def check_age_restricted(self):
+        day, month, year = map(int, self.__birth_date.split('/'))
+        birth = datetime(year, month, day)
+        date_diff = relativedelta.relativedelta(datetime.now(),birth)
+        if date_diff.years>=18 :
+            return "over 18"
+        else: 
+            return "under 18"
 
 
 class Writer(Reader):
@@ -219,7 +247,10 @@ class Writer(Reader):
     def show_writing_name_list(self):
         writing_name_list = []
         for book in self.__writing_list:
-            writing_name_list.append(book.name)
+            book_dict = {"book_name" : book.name,
+                                "pseudonym": book.pseudonym,
+                                "genre" : book.genre}
+            writing_name_list.append(book_dict)
         return writing_name_list
     
     def check_repeated_pseudonym(self, new_pseudonym):
@@ -227,5 +258,3 @@ class Writer(Reader):
             if pseudonym.lower() == new_pseudonym.lower():
                 return True
         return False
-    
-    

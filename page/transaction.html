@@ -52,19 +52,29 @@
         </div>
         <br>
 
-        <h1 class="">ประวัติการสั่งซื้อ</h1>
+        <h1 class="pangtransac_title">ประวัติการสั่งซื้อ</h1>
         <!-- รีเทินรับจาก apiมา  โชว๋เปนbox -->
 
-        <select name="transaction_type" id="transaction_type">
-            <option value="coin">ประวัติการซื้อเหรียญ</option>
-            <option value="chapter">ประวัติการซื้อตอน</option>
-        </select>
+        <div class="pangdrop_down_box">
+            <select class="pangdrop_down" name="transaction_type" id="transaction_type">
+                <option value="coin">ประวัติการซื้อเหรียญ</option>
+                <option value="chapter">ประวัติการซื้อตอน</option>
+            </select>
+        </div>
 
         <!-- ถ้าทำทันจะมาทำ  drop down ช่วงเวลา -->
 
         <!-- <img src="/assets/transaction_img/not_found_transac.png"> -->
 
-        <div id="return_transaction"></div>
+        <!-- <div id="return_coin_transaction"></div> -->
+
+        <div class="pangcoin_transaction_pop" id="coin_transaction_box">
+            <div class="pangtransaction" id="return_coin_transaction"></div>
+        </div>
+
+        <div class="pangchapter_transaction_pop" id="chapter_transaction_box">
+            <div class="pangtransaction" id="return_chapter_transaction"></div>
+        </div>
         
         <footer class="footer">
             <div class="footer_item_container">

@@ -146,16 +146,17 @@ class Controller:
     #         return True
     #     else:
     #         book.delete_report_list()
-    # return False              
+    # return False  
+    def check_repeated_pseudonym(self, new_pseudonym):
+        for pseudonym in self.all_pseudonym_list:
+            if pseudonym.lower() == new_pseudonym.lower():
+                return True
+        return False
     
-    def check_age_restricted(self):
-        day, month, year = map(int, self.__birth_date.split('/'))
-        birth = datetime(year, month, day)
-        date_diff = relativedelta.relativedelta(datetime.now(),birth)
-        if date_diff.years>=18 :
-            return "over 18"
-        else: 
-            return "under 18"
+    def if_user_not_found(self, user):
+        if not (isinstance(user, Reader) or isinstance(user, Writer)):
+            return True
+        return False            
     
     def add_coin_to_user(self, user, payment, golden_amount, silver_amount, price):
         payment.buy_coin(price)
