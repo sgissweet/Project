@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/style/payment_style.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create Book</title>
+
+    </head>
+    <body>
+        
+        <header class="top_header"> 
+            <a class="menu_item brand" href="homepage.html"><img class="brand_img" src="/assets/writearead_img/WriteARead_white.png"></a>
+            <!-- <a class="menu_item" href="homepage.html">Home</a> -->
+        </header>
+
+        <h1 class="first_payment_title">นิยาย</h1>
+        
+        <form>
+            <label for="img">Select image : </label>
+            <input type="file" id="img" name="img" accept="image/*">
+            <input type="submit">
+        </form>
+
+        <div class="">
+            <h1 class="payment_title">ชื่อเรื่อง</h1>
+            <form>
+                <input class="promotion_code" type="text" id="book_name" name="book_name" placeholder="ชื่อเรื่อง" required>
+            </form>
+        </div>
+
+        <div class="">
+            <h1 class="payment_title">คำโปรย</h1>
+            <form>
+                <input class="promotion_code" type="text" id="prologue" name="prologue" placeholder="เพิ่มคำโปรยสั้น ๆ">
+                <!-- <button></button> -->
+            </form>
+        </div>
+
+        <div class="">
+            <h1 class="payment_title">นามปากกา</h1>
+            <form>
+                <input class="promotion_code" type="text" id="pseudonym" name="pseudonym" placeholder="นามปากกาของคุณ">
+                <!-- <button></button> -->
+            </form>
+        </div>
+
+        <div class="">
+            <h1 class="payment_title">แท็ก</h1>
+            <form>
+                <input class="promotion_code" type="text" id="tag" name="tag" placeholder="ใส่แท็ก แนวนิยาย">
+                <!-- <button></button> -->
+            </form>
+        </div>
+
+        <div class="">
+            <h1 class="payment_title">จำกัดอายุการเข้าถึง</h1>
+            <form>
+                <input type="checkbox" name="age_restricted" value="true">
+                <label for="age_restricted">age_restricted(18+)</label><br>
+            </form>
+        </div>
+
+        <div class="">
+            <h1 class="payment_title">สถานะ</h1>
+            <form>
+                <input type="checkbox" id="ongoing" name="ongoing" value="Ongoing">
+                <label for="ongoing">Ongoing</label><br>
+                <input type="checkbox" id="finished" name="finished" value="Finished">
+                <label for="finished">Finished</label><br>
+                <input type="checkbox" id="obscure" name="obscure" value="Obscure">
+                <label for="obscure">Obscure</label><br>
+            </form>
+        </div>
+
+        <div class="final_button">
+            <button class="cancel_button" onclick="cancel_button()" type="submit">ยกเลิก</button>
+            <button class="submit_button" onclick="pop_up_success_form()" type="submit">ยืนยัน</button> 
+        </div>
+
+        <!-- pop up2 -->
+        <div class="popup" id="success_form">
+            <form class="info_form_container">
+                <div id="content"></div>
+            </form>
+        </div>
+
+        
+        
+        <footer class="bottom_footer">
+            <a class="menu_item" href="https://www.readawrite.com/">ReadAWrite</a>
+            <a class="menu_item" href="https://www.mareads.com/my-coin/payment">Ref from MaReads</a>
+            <p class="bottom_context">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
+        </footer>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/script/payment_script.js"></script>
+    </body>
+</html>

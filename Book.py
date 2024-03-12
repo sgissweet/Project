@@ -4,9 +4,9 @@ from Comment import Comment #
 from datetime import datetime, timedelta
 
 class Book:
-    def __init__(self, name, x, writer, genre, status, age_restricted, prologue):
+    def __init__(self, name, pseudonym, writer, genre, status, age_restricted, prologue):
         self.__name = name
-        self.__pseudonym = x
+        self.__pseudonym = pseudonym
         self.__writer = writer
         self.__genre = genre
         self.__status = status
@@ -142,10 +142,11 @@ class Book:
             return "/"
         return "X"
     
+    
     def show_book_info(self):
         return {"name" : self.__name,
                 "pseudonym" : self.__pseudonym,
-                "tags" : self.tag,
+                "tags" : self.tag, ################################
                 "status" : self.status,
                 "prologue" : self.prologue,
                 "age_retricted" : self.show_age_restricted(),

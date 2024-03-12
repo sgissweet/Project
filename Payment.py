@@ -35,7 +35,7 @@ class OnlineBanking(PaymentMethod):
     def buy_coin(self, price):
         print("The system is implemented Please wait for the confirmation of the service")
         print(f"The system is sending a bill to account number {self.__account_id} total {price} baht")
-        # print("Purchase successful, THANK YOU")
+        print("Purchase successful, THANK YOU")
         
     
 class DebitCard(PaymentMethod):

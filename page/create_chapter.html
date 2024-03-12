@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/style/payment_style.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create Chapter</title>
+
+    </head>
+    <body>
+        
+        <header class="top_header"> 
+            <a class="menu_item brand" href="homepage.html"><img class="brand_img" src="/assets/writearead_img/WriteARead_white.png"></a>
+            <!-- <a class="menu_item" href="homepage.html">Home</a> -->
+        </header>
+
+        <h1 class="first_payment_title">รายตอน</h1>
+
+        <div class="">
+            <h1 class="payment_title">บทที่</h1>
+            <form>
+                <input class="promotion_code" type="number" id="chapter_number" name="chapter_number" placeholder="บทที่" required>
+            </form>
+        </div>
+
+        <div class="">
+            <h1 class="payment_title">ชื่อตอน</h1>
+            <form>
+                <input class="promotion_code" type="text" id="chapter_name" name="chapter_name" placeholder="(ตัวอย่าง การผจญภัยครั้งใหม่)">
+            </form>
+        </div>
+
+        <div class="">
+            <h1 class="payment_title">เนื้อหา</h1>
+            <form>
+                <input class="promotion_code" type="text" id="context" name="context" placeholder="เริ่มต้นการเขียนของคุณ">
+            </form>
+        </div>
+
+        <div class="final_button">
+            <button class="cancel_button" onclick="cancel_button()" type="submit">ยกเลิก</button>
+            <button class="submit_button" onclick="pop_up_success_form()" type="submit">ยืนยัน</button> 
+        </div>
+
+        <!-- pop up2 -->
+        <div class="popup" id="success_form">
+            <form class="info_form_container">
+                <div id="content"></div>
+            </form>
+        </div>
+
+        
+        
+        <footer class="bottom_footer">
+            <a class="menu_item" href="https://www.readawrite.com/">ReadAWrite</a>
+            <a class="menu_item" href="https://www.mareads.com/my-coin/payment">Ref from MaReads</a>
+            <p class="bottom_context">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
+        </footer>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/script/payment_script.js"></script>
+    </body>
+</html>

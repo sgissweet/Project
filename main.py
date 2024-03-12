@@ -27,15 +27,15 @@ write_a_read.add_reader(pintt)
 write_a_read.add_reader(Reader("Pangrum", "ehehe", "02/01/2005"))
 write_a_read.add_reader(Reader("Jueeen", "whippedcream", "12/11/2004"))
 
-# Book (self,name,writer,tag_list,status,age_restricted,prologue,date_time):
-# Book1 = Book("Shin_chan","eiei", Mo, ["kids", "comedy","crime"], "publishing", 7, "shin_chan_prologue")
-# Book2 = Book("Shinosuke", Mo, ["kids", "comedy","crime"], "publishing", 7, "shin_chan_prologue")
-book1 = Book("Shin_chan", "Mola", Mo, ["kids", "comedy","crime"], "publishing", 7, "Shin Chan is a 50-year-old boy")
-# Mo.add_writing_list(book1)
-# Mo.add_writing_book_list(book1)
+shin_chan_prologue = "Shin Chan is a 50-year-old boy"
+
+book1 = Book("Shin_chan", "Mola", Mo, ["kids", "comedy","crime"], "publishing", 7, shin_chan_prologue)
 Mo.add_writing_list(book1)
-# print(book1.pseudonym)
-# Mo.add_writing_book_list(book2)
+
+book2 = Book("Shinosuke", "Mola", Mo, ["kids", "comedy","crime"], "publishing", 7, shin_chan_prologue)
+Mo.add_writing_list(book2)
+
+book1.add_chapter_list(Chapter("Shin_chan", "1", "first_ch", "this is the first chapter of shincha", 184))
 
 #chapter_number, name, context, date_time, cost):
 Chapter1_1 = Chapter("1", "first chapter of shinchan", "this is the first chapter of shinchan", "01/01/2020", 5)
@@ -51,7 +51,8 @@ write_a_read.add_promotion(promotion_11_11)
 
 now = datetime.now()
 # write_a_read.buy_coin("Pinttttt", (TrueMoneyWallet("0123456789")), "December", 5000)
-# write_a_read.buy_coin("Pinttttt", (OnlineBanking("0123456789")), "November", 100)
+# print(write_a_read.buy_coin("Pinttttt", (OnlineBanking("0123456789")), "November", 100))
+
 
 Mo.add_coin_transaction_list(CoinTransaction(OnlineBanking("0123456789"), 500, "+500", "+50", now))
 Mo.add_coin_transaction_list(CoinTransaction(TrueMoneyWallet("9876543210"), 500, "+500", "+50", now))
@@ -59,8 +60,8 @@ Mo.add_coin_transaction_list(CoinTransaction(TrueMoneyWallet("9876543210"), 500,
 
 app = FastAPI()
 
-if __name__ == "__main__":
-     uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
+# if __name__ == "__main__":
+#      uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
 
 #============================================tangmo
 origins = [
@@ -78,14 +79,6 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-#=============================================dto
-class dto_buy_coin(BaseModel):
-    username : str
-    golden_coin_amount : int
-    payment_method : str 
-    payment_info : str
-    code: Optional[str] = None
-
 #=============================================api
 @app.get("/get_coin_transaction", tags=['Coin Transaction'])
 def get_coin_transaction(username:str):
@@ -97,9 +90,77 @@ def get_my_coin(username:str):
     user = write_a_read.get_user_by_username(username)
     return {"Golden_Coin_balance" : user.golden_coin.balance, "Silver Coin balance" : user.show_silver_coin_list()}
 
+class dto_buy_coin(BaseModel):
+    username : str
+    golden_coin_amount : int
+    payment_method : str 
+    payment_info : str
+    code: Optional[str] = None
+    
 @app.post("/buy_coin", tags=['Buy Coin'])
 def buy_coin(dto : dto_buy_coin):
     payment = write_a_read.create_payment_method(dto.payment_method, dto.payment_info)
     write_a_read.buy_coin(dto.username, payment, dto.code, dto.golden_coin_amount)  
     return "Purchase successful, THANK YOU"
 
+@app.get("/show_chapter_transaction", tags=['Chapter Transaction'])
+def ShowChapterTransaction(username:str):
+     user = write_a_read.get_user_by_username(username)
+     if write_a_read.if_user_not_found(user): return user
+     return {"Chapter Transaction" : user.show_chapter_transaction()}
+ 
+class dto_create_book(BaseModel):
+     name:str
+     pseudonym:str
+     writer_name:str
+     tag_list: str
+     prologue: str
+     age_restricted: bool
+     status: str 
+
+# ยังแตกอยุ่
+# เพิ่มเก็บชื่อusernameของไร้เต้อ
+@app.post("/book", tags=['Book'])
+def CreateBook(dto : dto_create_book):
+     return write_a_read.create_book(dto.name, dto.pseudonym, dto.writer_name, dto.tag_list, dto.status, dto.age_restricted, dto.prologue)
+
+class dto_create_chapter(BaseModel):
+     book_name:str
+     chapter_number:int
+     name:str
+     context: str
+     cost : int
+     
+@app.post("/chapter", tags=['Chapter'])
+def CreateChapter(dto : dto_create_chapter):
+     return write_a_read.create_chapter(dto.book_name, dto.chapter_number, dto.name, dto.context, dto.cost)
+ 
+class dto_edit_book(BaseModel):
+     old_name : str = None
+     new_name : str = None
+     new_genre: str = None
+     prologue: str = None
+     age_restricted: bool = None
+     status: str = None
+     
+@app.put("/edit_book", tags=['Book'])
+def EditBookInfo(dto : dto_edit_book):
+     book =  write_a_read.edit_book_info(dto.old_name,dto.new_name,dto.new_genre,dto.status,dto.age_restricted,dto.prologue)
+     if isinstance(book,Book):
+          return book
+     else:
+          return {"error": "Book not found"}
+     
+class dto_edit_chapter(BaseModel):
+     chapter_id : str = None
+     name : str = None
+     context : str = None
+     cost : int = None
+     
+@app.put("/edit_chapter", tags=['Chapter'])
+def EditChapterInfo(dto : dto_edit_chapter):
+     chapter =  write_a_read.edit_chapter_info(dto.chapter_id, dto.name, dto.context, dto.cost)
+     if isinstance(chapter,Chapter):
+          return chapter
+     else:
+          return {"error": "Book not found"}

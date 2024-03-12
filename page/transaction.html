@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="/style/coin_transac_style.css">
+        <link rel="stylesheet" href="/style/transaction.css">
         <link rel="stylesheet" href="/style/header_footer.css">
         <link rel="stylesheet" href="/style/mystyle.css">
 
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 
-        <script src="/scripts/search_bar.js"></script>
-        <script src="/scripts/banner_slide.js"></script>
-        <script src="/scripts/toggle_search.js"></script>
-        <script src="/scripts/search_page.js"></script>
+        <!-- <script src="/script/search_bar.js"></script>
+        <script src="/script/banner_slide.js"></script>
+        <script src="/script/toggle_search.js"></script>
+        <script src="/script/search_page.js"></script> -->
         
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
     </head>
 
     <body>
-        <section id="searchBar">
+        <!-- <section id="searchBar">
             <div id="dark_overlay" onclick="toggle_search_off()"></div>
             <div  id="search_header">
                 <div class="search_item">
@@ -33,39 +33,44 @@
                     </form>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <div class="header_flexbox_menu">
-            <div class="header_menu_item">
+            <!-- <div class="header_menu_item">
                 <a class="header_writing_type" href="#">นิยาย</a>
                 <a class="header_writing_type" href="#">แฟนฟิค</a>
                 <a class="header_writing_type" href="#">การ์ตูน</a>
-            </div>
+            </div> -->
             <div class="header_menu_item">
                 <a href="homepage.html"><img src="/assets/writearead_img/WriteARead_white.png" class="WriteARead_image"></a>
             </div>
-            <div class="header_menu_item">
+            <!-- <div class="header_menu_item">
                 <a href="#" onclick="toggle_search()"> <img class="search_icon" src="../assets/header_img/search_button_light.png" alt="Original Image"></a>
                 <a href="#"> <img class="pen_icon" src="../assets/header_img/writing_button_light.png" alt=Original Image"></a>
                 <a href="#"> <img class="user_icon" src="../assets/header_img/user_button_light.png" alt=Original Image"></a>
-            </div>
+            </div> -->
         </div>
         <br>
-        
-        
 
+        <h1 class="">ประวัติการสั่งซื้อ</h1>
+        <!-- รีเทินรับจาก apiมา  โชว๋เปนbox -->
 
+        <select name="transaction_type" id="transaction_type">
+            <option value="coin">ประวัติการซื้อเหรียญ</option>
+            <option value="chapter">ประวัติการซื้อตอน</option>
+        </select>
 
+        <!-- ถ้าทำทันจะมาทำ  drop down ช่วงเวลา -->
 
+        <!-- <img src="/assets/transaction_img/not_found_transac.png"> -->
 
-
-
+        <div id="return_transaction"></div>
         
         <footer class="footer">
             <div class="footer_item_container">
                 <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
             </div>
-            <div class="footer_item_container">
+            <!-- <div class="footer_item_container">
                 <a class="footer_menu_text" href="payment.html">Payment</a>
             </div>
             <div class="footer_item_container">
@@ -73,7 +78,7 @@
             </div>
             <div class="footer_item_container">
                 <a class="footer_menu_text" href="search_page.html">search</a>
-            </div>
+            </div> -->
             <div class="footer_item_container">
                 <a class="footer_menu_text" href="payment.html">Payment</a>
             </div>

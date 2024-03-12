@@ -34,6 +34,24 @@ class Controller:
     def payment_list(self):
         return self.__payment_list
     
+    @property
+    def all_book_list(self):
+        book_list=[]
+        for writer in self.__writer_list:
+            for book in writer.writing_list:
+                book_list.append(book)
+        return book_list
+    
+    @property
+    def all_pseudonym_list(self):
+        pseudonym_list = []
+        for user in self.__writer_list:
+            for pseudonym in user.pseudonym_list:
+                pseudonym_list.append(pseudonym)
+        return pseudonym_list
+    
+
+    
     def add_reader(self, reader):
         self.__reader_list.append(reader)
     def add_writer(self, writer):
@@ -62,6 +80,19 @@ class Controller:
             for book in writer.writing_list:
                 if book.name == book_name:
                     return book
+    def get_chapter_by_chapter_id(self, chapter_id):
+        for book in self.all_book_list:
+            for chapter in book.chapter_list:
+                if chapter.chapter_id == chapter_id:
+                    return chapter
+        return "Chapter Not Found"
+    
+    def get_book_by_chapter_id(self, chapter_id):
+        for book in self.all_book_list:
+            for chapter in book.chapter_list:
+                if chapter.chapter_id == chapter_id:
+                    return book
+        return "Book Not Found"
     
     def search_coin_promotion(self, code):
         if(code != None):
@@ -248,24 +279,25 @@ class Controller:
         else : 
             return {"User": "invalid username"}
         
-    def create_book(self, name:str, writer_name:str, tag_list: str, status: str, age_restricted: bool, prologue: str):
+    def create_book(self, name:str, pseudonym:str, writer_name:str, tag_list: str, status: str, age_restricted: bool, prologue: str):
         writer = self.get_user_by_username(writer_name)
         book = self.get_book_by_name(name)
-        if isinstance(writer,Writer) and isinstance(book,Book) == False:
-            new_book = Book(name,writer,tag_list,status,age_restricted,prologue)
-            writer.add_writing_book_list(new_book)
-            return {"Book": "create book successfully"}
-        else : 
-            return {"Book": "please try again"}
+        if isinstance(writer,Writer) and not isinstance(book,Book):
+            new_book = Book(name, pseudonym, writer, tag_list, status,age_restricted, prologue)
+            writer.add_writing_list(new_book)
+            return {"create book successfully" : new_book.show_book_info()}
+            #pint returns new_book
+        return "please try again"
     
+    #return reasons in detail, ไม่ควรสร้าง chapter ที่ n ได้ถ้ายังไม่มี n-1
     def create_chapter(self,book_name,chapter_number, name, context, cost):
         book = self.get_book_by_name(book_name)
         if isinstance(book,Book) and book.is_chapter_valid(chapter_number):
-            chapter = Chapter(book_name,chapter_number, name, context, cost)
+            chapter = Chapter(book_name, chapter_number, name, context, cost)
             book.add_chapter_list(chapter)
-            return {"Chapter": "create Chapter successfully"}
+            return {"create Chapter successfully" : chapter.show_chapter_info()}
         else : 
-            return {"Chapter": "please try again"}   
+            return "please try again"
         
     def create_comment(self, chapter_id, username, context):
         chapter = self.search_chapter_by_chapter_id(chapter_id)
@@ -306,14 +338,16 @@ class Controller:
         return book
             
     def edit_chapter_info(self,chapter_id, name, context, cost):
-        chapter = self.search_chapter_by_chapter_id(chapter_id)
+        chapter = self.get_chapter_by_chapter_id(chapter_id)
+        if not isinstance(chapter, Chapter): return chapter
         if name:
-            chapter.name=name
+            chapter.update_name(name)
         if context:
-            chapter.context(context)
+            chapter.update_context(context)
         if cost:
-            chapter.cost(cost)
-        # chapter.publish_date_time(0)
-        return chapter
+            chapter.update_cost(cost)
+        # chapter.publish_date_time(0) #last edit
+        return {"Chapter updated" : chapter.show_chapter_info()}
+    
     
 
