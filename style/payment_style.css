@@ -193,6 +193,8 @@ html, body {
 }
 
 .promotion_code {
+    font-family: "IBM Plex Sans Thai", sans-serif;
+    font-style: normal;
     font-weight: 400;
     display: block;
     border: 1px solid #d7d6d6; 

@@ -57,7 +57,7 @@ now = datetime.now()
 Mo.add_coin_transaction_list(CoinTransaction(OnlineBanking("0123456789"), 500, "+500", "+50", now))
 Mo.add_coin_transaction_list(CoinTransaction(TrueMoneyWallet("9876543210"), 500, "+500", "+50", now))
 
-Mo.add_chapter_transaction_list(ChapterTransaction(Chapter1_1, 5))
+# Mo.add_chapter_transaction_list(ChapterTransaction(Chapter1_1, 5))
 #=====================================================================================================
 
 app = FastAPI()

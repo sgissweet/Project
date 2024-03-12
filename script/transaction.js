@@ -19,6 +19,8 @@ document.getElementById('transaction_type').addEventListener('change', function(
 
 const coin_transaction_box = document.getElementById('coin_transaction_box');
 const chap_transaction_box = document.getElementById('chapter_transaction_box');
+const img_not_found = document.getElementById('not_found');
+
 
 async function show_coin_transaction() {
     const input = transaction_data.username;
@@ -34,14 +36,16 @@ async function show_coin_transaction() {
         for(let i = 0; i < coin_transaction.length; i++) {
             console.log(coin_transaction[i]);
             content.innerHTML += `<div><p> ${coin_transaction[i]} </p></div>`;
+            chap_transaction_box.style.display = 'none';
+            coin_transaction_box.style.display = 'block';
+            img_not_found.style.display = 'none';
         }
     } else { 
         console.log("No coin transaction data available");
-        content.innerHTML = `<img src="/assets/transaction_img/not_found_transac.png">`;
+        img_not_found.style.display = 'block';
+        chap_transaction_box.style.display = 'none';
+        coin_transaction_box.style.display = 'block';
     }
-
-    chap_transaction_box.style.display = 'none';
-    coin_transaction_box.style.display = 'block';
 }
 
 async function show_chapter_transaction() {
@@ -57,13 +61,16 @@ async function show_chapter_transaction() {
         for(let i = 0; i < chapter_transaction.length; i++) {
             console.log(chapter_transaction[i]);
             content.innerHTML += `<div><p> ${chapter_transaction[i]} </p></div>`;
+            coin_transaction_box.style.display = 'none';
+            chap_transaction_box.style.display = 'block';
+            img_not_found.style.display = 'none';
         }
     } else { 
         console.log("No coin transaction data available");
-        content.innerHTML = `<img src="/assets/transaction_img/not_found_transac.png">`;
+        coin_transaction_box.style.display = 'none';
+        chap_transaction_box.style.display = 'none';
+        img_not_found.style.display = 'block';
     }
 
-    coin_transaction_box.style.display = 'none';
-    chap_transaction_box.style.display = 'block';
 }
 

@@ -1,5 +1,8 @@
 const payment_data = {};
 
+// localStorage
+localStorage("ewwe", value)
+
 payment_data.username = "Mozaza"
 
 document.getElementById('online_banking').addEventListener('click', function() {
@@ -102,7 +105,7 @@ async function pop_up_success_form() {
     success_form.style.display = 'block';
     setTimeout(function () {
         success_form.style.display = 'none';
-        // window.location.href = '/page/transaction.html';
+        window.location.href = '/page/transaction.html';
       }, 3000);
 }
 
