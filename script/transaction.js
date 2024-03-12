@@ -1,8 +1,7 @@
 
 const transaction_data = {};
 
-
-transaction_data.username = "Mozaza"
+transaction_data.username = localStorage.getItem("login_username");
 
 document.getElementById('transaction_type').addEventListener('change', function() {
     const transaction_type = this.value;

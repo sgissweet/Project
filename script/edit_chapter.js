@@ -1,16 +1,26 @@
-const create_chap_data = {};
-
+const edit_chap_data = {};
+    // create
     // book_name:str
     // chapter_number:int
     // name:str
     // context: str
     // cost : int
 
+    // edit
+    // chapter_id : str = None
+    //  name : str = None
+    //  context : str = None
+    //  cost : int = None
+
 // create_chap_data.book_name = localStorage.getItem('');
-create_chap_data.book_name = "Shin_chan";
+// set ที่หน้า pre edit
+localStorage.getItem("book_name_last");
+localStorage.getItem("chapter_id_last");
 
+edit_chap_data.book_name = localStorage.getItem("book_name_last");
+edit_chap_data.chapter_id = localStorage.getItem("chapter_id_last");
 
-async function submit_create_chap() {
+async function submit_edit_chap() {
     create_chap_data.chapter_number = document.getElementById('chapter_number').value;
     create_chap_data.name = document.getElementById('chapter_name').value;
     create_chap_data.context = document.getElementById('context').value;

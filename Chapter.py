@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 class Chapter:
     def __init__(self, book_name, chapter_number, chapter_name, context, cost):
-        self.__chapter_id = str(book_name) + "/" + str(chapter_number)
+        self.__chapter_id = str(book_name) + "-" + str(chapter_number)
         self.__chapter_number = chapter_number
         self.__name = chapter_name
         self.__context = context
@@ -67,7 +67,8 @@ class Chapter:
         self.__context = new_context
         
     def show_chapter_info(self):
-        return {"chapter_number" : self.__chapter_number,
+        return {"chapter_id" : self.__chapter_id,
+                "chapter_number" : self.__chapter_number,
                 "name" : self.__name,
                 "price" : self.__cost,
                 "context" : self.__context,

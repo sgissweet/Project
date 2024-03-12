@@ -7,7 +7,9 @@ const create_chap_data = {};
     // cost : int
 
 // create_chap_data.book_name = localStorage.getItem('');
-create_chap_data.book_name = "Shin_chan";
+localStorage.getItem("book_name_last");
+
+create_chap_data.book_name = localStorage.getItem("book_name_last");
 
 
 async function submit_create_chap() {

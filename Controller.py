@@ -81,11 +81,15 @@ class Controller:
                 if book.name == book_name:
                     return book
     def get_chapter_by_chapter_id(self, chapter_id):
-        for book in self.all_book_list:
-            for chapter in book.chapter_list:
-                if chapter.chapter_id == chapter_id:
-                    return chapter
-        return "Chapter Not Found"
+        if "-" in chapter_id:
+            for book in self.all_book_list:
+                for chapter in book.chapter_list:
+                    if chapter.chapter_id == chapter_id:
+                        return chapter
+        elif isinstance(self.get_book_by_name(chapter_id),Book):
+            return self.get_book_by_name(chapter_id)
+        else:
+            return {"message":"Chapter Not Found"}
     
     def get_book_by_chapter_id(self, chapter_id):
         for book in self.all_book_list:
@@ -260,25 +264,31 @@ class Controller:
             return f"Golden Coin : {user.golden_coin.balance} | Silver Coin : {user.silver_coin_balance}"
         return "User Not Found"
     
-    def sign_in(self,username, password):
+    def sign_in(self, username, password):
         user = self.get_user_by_username(username)
-        print(user.username, user.password, user.birth_date)
-        if (isinstance(user,Reader) or isinstance(user,Writer)):
-            if user.password == password:
-                return "log in successfully"
-            else: 
-                return "wrong password"
-        else:
-            return "can not find username/password"
+        if self.if_user_not_found(user): return "username doesn't exist"
+        if user.password == password:
+            if(isinstance(user, Reader)):
+                return {"response" : "log in successfully", "role" : "reader"}
+            if(isinstance(user, Writer)):
+                return {"response" : "log in successfully", "role" : "writer"}
+            
+        return {"response" : "wrong password"}
     
-    def sign_up(self,username:str, password:str, birth_date: str):
+    def sign_up(self,username:str, password:str, birth_date: str, role:str):
         user = self.get_user_by_username(username)
-        if isinstance(user,Reader) == False or isinstance(user,Writer) == False:
-            new_reader = Reader(username,password,birth_date)
-            self.add_reader(new_reader)
-            return {"User": "sign up successfully"}
-        else : 
-            return {"User": "invalid username"}
+        if not (role.lower() == "reader" or role.lower() == "writer"):
+            return "please select Reader or Writer and try again"
+        
+        if not self.if_user_not_found(user): return "username is already taken"
+        
+        if role.lower() == "reader":
+            self.add_reader(Reader(username, password, birth_date))
+            
+        elif role.lower() == "writer":
+            self.add_writer(Writer(username, password, birth_date))
+        
+        return "Sign Up Successful"
         
     def create_book(self, name:str, pseudonym:str, writer_name:str, tag_list: str, status: str, age_restricted: bool, prologue: str):
         writer = self.get_user_by_username(writer_name)
@@ -348,7 +358,7 @@ class Controller:
         if cost:
             chapter.update_cost(cost)
         # chapter.publish_date_time(0) #last edit
-        return {"Chapter updated" : chapter.show_chapter_info()}
+        return chapter.show_chapter_info()
     
     
 

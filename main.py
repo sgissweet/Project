@@ -20,7 +20,7 @@ from fastapi.staticfiles import StaticFiles
 write_a_read = Controller()
 
 #create temporary instance
-Mo = Writer("Mozaza", "namchakeawpun", "12/05/2000")
+Mo = Writer("Mozaza", "12345678", "12/05/2000")
 pintt = Reader("Pinttttt", "sawasdee", "01/01/2005")
 write_a_read.add_writer(Mo)
 write_a_read.add_reader(pintt)
@@ -164,7 +164,31 @@ class dto_edit_chapter(BaseModel):
 @app.put("/edit_chapter", tags=['Chapter'])
 def EditChapterInfo(dto : dto_edit_chapter):
      chapter =  write_a_read.edit_chapter_info(dto.chapter_id, dto.name, dto.context, dto.cost)
-     if isinstance(chapter,Chapter):
-          return chapter
+     return chapter
+
+@app.get("/chapter/info/{chapter_id}")
+async def get_chapter_info(chapter_id: str):
+     chapter =write_a_read.get_chapter_by_chapter_id(chapter_id)
+     print("chapterrrrrrrrrrrrrrrrrrrrr_id", chapter_id)
+     if isinstance(chapter, Chapter):
+          return chapter.show_chapter_info()
      else:
-          return {"error": "Book not found"}
+          raise HTTPException(status_code=404, detail="Chapter not found")
+     
+     
+@app.get("/sign_in", tags=['sign up/sign in'])
+def SignIN(username:str, password:str):
+     return write_a_read.sign_in(username, password)
+
+class dto_sign_up(BaseModel):
+     username:str
+     password:str
+     birth_date: str
+     role: str
+
+@app.post("/sign_up", tags=['sign up/sign in'])
+def SignUp(dto : dto_sign_up):
+     return write_a_read.sign_up(dto.username, dto.password, dto.birth_date, dto.role)
+
+# print(write_a_read.create_chapter("Shin_chan", 2, "chap2", "eewewewe", 0))
+# print(write_a_read.edit_chapter_info("Shin_chan/2", "chap2 edit", "content edit", 10))
