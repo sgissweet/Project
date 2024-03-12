@@ -8,6 +8,9 @@ async function alert_success() {
     console.log(response.data.role);
 
     if(response.data.response == "log in successfully") {
+
+        window.location.href = 'homepage.html';
+
         alert('เข้าสู่ระบบสำเร็จ!');
         localStorage.setItem('login_username', username);
         localStorage.setItem('login_role', response.data.role);

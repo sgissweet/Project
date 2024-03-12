@@ -22,8 +22,8 @@ async function alert_success() {
     console.log(response.data);
 
     if(response.data == "Sign Up Successful") {
-        alert('ลงทะเบียนสำเร็จ!');
         window.location.href = 'sign_in.html';
+        alert('ลงทะเบียนสำเร็จ!');
 
     } else if(response.data == "username is already taken") {
         alert('ชื่อนี้ถูกใช้แล้ว');
