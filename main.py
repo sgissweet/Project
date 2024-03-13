@@ -92,10 +92,10 @@ app.add_middleware(
 )
 
 #=============================================api
-@app.get("/get_coin_transaction", tags=['Coin Transaction'])
+@app.get("/get_coin_transaction/{username}", tags=['Coin Transaction'])
 def get_coin_transaction(username:str):
     user = write_a_read.get_user_by_username(username)
-    return {"Coin_Transaction" : user.show_coin_transaction()}
+    return user.show_coin_transaction()
 
 @app.get("/get_my_coin", tags=['My Coin'])
 def get_my_coin(username:str):
@@ -115,11 +115,11 @@ def buy_coin(dto : dto_buy_coin):
     write_a_read.buy_coin(dto.username, payment, dto.code, dto.golden_coin_amount)  
     return "Purchase successful, THANK YOU"
 
-@app.get("/show_chapter_transaction", tags=['Chapter Transaction'])
+@app.get("/show_chapter_transaction/{username}", tags=['Chapter Transaction'])
 def ShowChapterTransaction(username:str):
      user = write_a_read.get_user_by_username(username)
      if write_a_read.if_user_not_found(user): return user
-     return {"Chapter_Transaction" : user.show_chapter_transaction()}
+     return user.show_chapter_transaction()
  
 class dto_create_book(BaseModel):
      name:str

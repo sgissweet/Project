@@ -85,7 +85,7 @@ async function pop_up_success_form() {
     payment_data.code = document.getElementById('promotion_code').value;
     payment_data.payment_info = document.getElementById('payment_info').value;
     
-    axios.post("http://127.0.0.1:5500/buy_coin", {
+    axios.post("http://127.0.0.1:8000/buy_coin", {
         "username": payment_data.username,
         "golden_coin_amount": payment_data.golden_coin_amount,
         "payment_method": payment_data.payment_method,

@@ -1,1 +1,1 @@
-if __name__ == "__main__":
+"/show_chapter_transaction/{username}"
