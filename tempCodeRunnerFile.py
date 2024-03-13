@@ -1,5 +1,1 @@
-book_name:str
-     chapter_number:int
-     name:str
-     context: str
-     cost : int
+if __name__ == "__main__":

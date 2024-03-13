@@ -62,9 +62,13 @@ Mo.add_coin_transaction_list(CoinTransaction(TrueMoneyWallet("9876543210"), 500,
 
 app = FastAPI()
 
-# if __name__ == "__main__":
-#      uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
+if __name__ == "__main__":
+     uvicorn.run("main:app", host="127.0.0.1", port=5500, log_level="info")
 
+app.mount("/page", StaticFiles(directory="page"), name="page")
+app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/scripts", StaticFiles(directory="scripts"), name="scripts")
+app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 #============================================tangmo
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -73,6 +77,10 @@ origins = [
     "localhost:5500",
     "http://127.0.0.1:5500",
     "127.0.0.1:5500/"
+    "http://localhost:8000",
+    "localhost:8000",
+    "http://127.0.0.1:8000",
+    "127.0.0.1:8000/"
 ]
 
 app.add_middleware(
