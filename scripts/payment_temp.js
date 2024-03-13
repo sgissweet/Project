@@ -3,7 +3,8 @@ const payment_data = {};
 // localStorage
 // localStorage.getItem("login_username")
 
-payment_data.username = localStorage.getItem("login_username");
+// payment_data.username = localStorage.getItem("login_username");
+payment_data.username = "Mozaza";
 
 document.getElementById('online_banking').addEventListener('click', function() {
     payment_data.payment_method = "OnlineBanking";
@@ -81,23 +82,34 @@ function pop_up_info_form() {
     info_form.style.display = 'block';
 }
 
-async function pop_up_success_form() {
+function pop_up_success_form() {
     payment_data.code = document.getElementById('promotion_code').value;
     payment_data.payment_info = document.getElementById('payment_info').value;
     
-    axios.post("http://127.0.0.1:8000/buy_coin", {
-        "username": payment_data.username,
-        "golden_coin_amount": payment_data.golden_coin_amount,
-        "payment_method": payment_data.payment_method,
-        "payment_info": payment_data.payment_info,
-        "code": payment_data.code
-      })
-      .then((response) => {
-        console.log(response.data);
+    const jsonDataString = JSON.stringify(payment_data)
+    fetch(`/buy_coin`, {
+
+        method: 'POST',
+        headers: { 'Content-Type' : 'application/json'},
+
+        body: jsonDataString
+
+    })  
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error('Failed to submit comment');
+        }
+        return response.json();
+        
+    })
+    .then(data => {
+        console.log(data);
 
         const content = document.getElementById("content");
-        content.innerHTML = `<p>${response.data}</p>`;
+        content.innerHTML = `<p>${data}</p>`;
+        
     })
+
     .catch((error) => {
         console.error("Error:", error);
     });
