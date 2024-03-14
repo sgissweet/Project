@@ -8,10 +8,10 @@ const create_book_data = {};
     //  status: str 
 
 // create_chap_data.book_name = localStorage.getItem('');
-localStorage.getItem("login_username");
+// localStorage.getItem("login_username");
 
-create_book_data.writer_name = localStorage.getItem("login_username");
-// create_book_data.writer_name = "Mozaza";
+// create_book_data.writer_name = localStorage.getItem("login_username");
+create_book_data.writer_name = "Mozaza";
 
 create_book_data.name = document.getElementById('book_name').value;
 create_book_data.pseudonym = document.getElementById('pseudonym').value;
@@ -36,7 +36,7 @@ function submit_create_book() {
     create_book_data.prologue = document.getElementById('prologue').value;
     // create_book_data.age_restricted = document.getElementById('age_restricted').value;
 
-    const jsonDataString = JSON.stringify(create_book_data)
+    const jsonDataString = JSON.stringify(create_book_data);
     fetch(`/book`, {
 
         method: 'POST',

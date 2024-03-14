@@ -3,8 +3,8 @@ const payment_data = {};
 // localStorage
 // localStorage.getItem("login_username")
 
-payment_data.username = localStorage.getItem("login_username");
-// payment_data.username = "Mozaza";
+// payment_data.username = localStorage.getItem("login_username");
+payment_data.username = "Mozaza";
 
 document.getElementById('online_banking').addEventListener('click', function() {
     payment_data.payment_method = "OnlineBanking";
