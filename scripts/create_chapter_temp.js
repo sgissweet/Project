@@ -37,8 +37,14 @@ function submit_create_chap() {
     .then(data => {
         console.log(data);
 
-        const content = document.getElementById("content");
-        content.innerHTML = `<p>Create Chapter Success</p>`;
+        if(data == "please try again") {
+            const content = document.getElementById("content");
+            content.innerHTML = `<p>Please Try Again</p>`;
+        } else {
+
+            const content = document.getElementById("content");
+            content.innerHTML = `<p>Create Chapter Success</p>`;
+        }
         
     })
 
