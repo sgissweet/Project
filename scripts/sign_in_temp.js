@@ -23,6 +23,7 @@ function alert_success() {
             alert('Login successful!'); // Show a success message
             localStorage.setItem('login_username', username);
             localStorage.setItem('login_role', data.role);
+            
         } else if (data.response === "wrong password") {
             alert('Login failed! Please check your username and password.'); // Show error message for wrong password
         } else {

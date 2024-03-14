@@ -64,8 +64,6 @@ function submit_create_book() {
         
     })
 
-
-
     .catch((error) => {
         console.error("Error:", error);
     });

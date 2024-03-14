@@ -10,35 +10,48 @@ const create_chap_data = {};
 localStorage.getItem("book_name_last");
 
 create_chap_data.book_name = localStorage.getItem("book_name_last");
+// create_chap_data.book_name = "Shin_chan";
 
-
-async function submit_create_chap() {
+function submit_create_chap() {
     create_chap_data.chapter_number = document.getElementById('chapter_number').value;
     create_chap_data.name = document.getElementById('chapter_name').value;
     create_chap_data.context = document.getElementById('context').value;
     create_chap_data.cost = document.getElementById('cost').value;
 
-    axios.post("http://127.0.0.1:8000/chapter", {
-        "book_name": create_chap_data.book_name,
-        "chapter_number": create_chap_data.chapter_number,
-        "name": create_chap_data.name,
-        "context": create_chap_data.context,
-        "cost": create_chap_data.cost
+    const jsonDataString = JSON.stringify(create_chap_data);
+    fetch(`/chapter`, {
+
+        method: 'POST',
+        headers: { 'Content-Type' : 'application/json' },
+
+        body: jsonDataString
+
       })
       .then((response) => {
-        console.log(response.data);
+        if (!response.ok) {
+            throw new Error('Failed to submit comment');
+        }
+        return response.json();
+
+    })
+    .then(data => {
+        console.log(data);
 
         const content = document.getElementById("content");
         content.innerHTML = `<p>Create Chapter Success</p>`;
+        
     })
+
     .catch((error) => {
         console.error("Error:", error);
     });
 
+    // window.location.href = '/page/writing';
+
     success_form.style.display = 'block';
     setTimeout(function () {
         success_form.style.display = 'none';
-        window.location.href = '/page/MyWritng.html';
+        // window.location.href = '../Templates/pre_edit_book.html';
       }, 3000);
 }
 
