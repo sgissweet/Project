@@ -57,7 +57,7 @@ function submit_create_chap() {
     success_form.style.display = 'block';
     setTimeout(function () {
         success_form.style.display = 'none';
-        // window.location.href = '../Templates/pre_edit_book.html';
+        window.location.href = '../Templates/pre_edit_book.html';
       }, 3000);
 }
 
