@@ -15,6 +15,7 @@
     </head>
 
     <body>
+
         <header class="top_header"> 
             <a class="menu_item brand" href="homepage.html"><img class="brand_img" src="/assets/writearead_img/WriteARead_white.png"></a>
         </header>
@@ -25,7 +26,7 @@
             </div>
             <div class="box"></div>
             <h2>Sign In</h2>
-            <form id="sign_in-form">
+            <form id="sign_in-form" >
                 <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" required>
@@ -35,8 +36,9 @@
                     <input type="password" id="password" name="password" minlength="8" required>
                 </div>
 
-                <button class="submit_button" onclick="alert_success()" type="submit">Sign In</button>
             </form>
+            
+            <button class="submit_button" onclick="alert_success()" type="submit">Sign In</button>
             
             <label for="username">หากยังไม่สมัครบัญชี WriteARead โปรด <a href="/page/sign_up.html">คลิก</a></label>
         </div>

@@ -2,22 +2,22 @@ function alert_success() {
     var username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    if(username == "" || password == "") {
+    if((username == "") || (password == "")) {
         alert('กรอกข้อมูลไม่ครบจ้าพี่');
     }
 
-    
-    fetch(`/sign_in/?username=${username}&password=${password}`) // Make sure to pass parameters correctly
-   
+    fetch(`/sign_in?username=${username}&password=${password}`) 
     .then(response => {
         if (!response.ok) {
-            throw new Error('Failed to sign in'); // Modify the error message accordingly
+            throw new Error('Failed to sign in'); 
         }
         return response.json();
     })
     .then(data => {
         console.log(data);
-
+        console.log(data.role);
+       
+        console.log(data.role);
         if (data.response === "log in successfully") {
             window.location.href = 'homepage.html'; // Redirect to homepage upon successful login
             alert('Login successful!'); // Show a success message
