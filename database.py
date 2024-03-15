@@ -54,6 +54,10 @@ write_a_read.create_chapter("Omniscient_readers_viewpoint_Special", "1", "Omnisc
 write_a_read.create_chapter("Naruto", "1", "Naruto_first_ch", "this is the first chapter of Naruto", 0)
 write_a_read.create_chapter("Naruto_Special", "1", "Naruto_Special_first_ch", "this is the first chapter of Naruto_Special", 800)
 
+write_a_read.create_comment("Shin_chan-1", "Pangzaza", "wow very fun! I love your writing.")
+write_a_read.create_comment("Shin_chan-1", "Pintzaza", "I love your writing. Saranghae Mola!!!")
+write_a_read.create_comment("Shinosuke-1", "Pangzaza", "why so expensive. :(")
+
 
 #promotion
 promotion_11_11 = CoinPromotion("15/03/2024", 10, "November")
