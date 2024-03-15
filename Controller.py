@@ -168,8 +168,10 @@ class Controller:
         user.add_golden_coin(golden_amount)
         user.add_silver_coin(silver_amount)
         user.add_coin_transaction_list(CoinTransaction(payment, price, f"+{golden_amount}", f"+{silver_amount}", date_time.strftime("%d/%m/%Y, %H:%M:%S")))
+
         
-    def buy_coin(self, username, payment, code, golden_amount):
+    def buy_coin(self, username, payment_method, payment_info, code, golden_amount):
+        payment = self.create_payment_method(payment_method, payment_info)
         price = golden_amount
         silver_amount = int(golden_amount * 10 / 100)
         user = self.get_user_by_username(username)
@@ -184,6 +186,8 @@ class Controller:
             print("Not applying any code")
             
         self.add_coin_to_user(user, payment, golden_amount, silver_amount, price)
+        
+        return "Purchase successful, THANK YOU"
     
     def buy_chapter(self, username, chapter_id):
         user = self.get_user_by_username(username)
@@ -360,5 +364,7 @@ class Controller:
         # chapter.publish_date_time(0) #last edit
         return chapter.show_chapter_info()
     
-    
+    def get_coin_transation(self, username):
+        user = self.get_user_by_username(username)
+        return user.show_coin_transaction()
 

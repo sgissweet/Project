@@ -82,14 +82,14 @@ function show_chapter_transaction() {
     console.log(data)
 
     const chapter_transaction = data
-    const content = document.getElementById('return_coin_transaction');
+    const content = document.getElementById('return_chapter_transaction');
     content.innerHTML = '';
 
 
     if(chapter_transaction && chapter_transaction.length > 0) {
         for(let i = 0; i < chapter_transaction.length; i++) {
             console.log(chapter_transaction[i]);
-            content.innerHTML += `<div><p> ${coin_transaction[i]} </p></div>`;
+            content.innerHTML += `<div><p> ${chapter_transaction[i]} </p></div>`;
             coin_transaction_box.style.display = 'none';
             chap_transaction_box.style.display = 'block';
             img_not_found.style.display = 'none';
