@@ -1,7 +1,7 @@
 from Book import Book
 from Chapter import Chapter
 from Payment import TrueMoneyWallet, OnlineBanking, DebitCard, PaymentMethod
-from Promotion import CoinPromotion
+from Promotion import CoinPromotion, BookPromotion
 from Reader import Reader, Writer
 from Controller import Controller
 from CoinTransaction import CoinTransaction
@@ -43,6 +43,8 @@ write_a_read.create_book("Naruto_Special", "Moeiei", "Mozaza", "adventure", "pub
 
 # chap
 write_a_read.create_chapter("Shin_chan", "1", "Shin_chan_first_ch", "this is the first chapter of shincha", 184)
+write_a_read.create_chapter("Shin_chan", "2", "Shin_chan_second_ch", "this is the second chapter of shincha", 200)
+write_a_read.create_chapter("Shin_chan", "3", "Shin_chan_third_ch", "this is the third chapter of shincha", 300)
 write_a_read.create_chapter("Shinosuke", "1", "Shinosuke_first_ch", "this is the first chapter of shincha", 184)
 write_a_read.create_chapter("Doraemon", "1", "Doraemon_first_ch", "this is the first chapter of Doraemon", 0)
 write_a_read.create_chapter("Doraemon_Special", "1", "Doraemon_Special_first_ch", "this is the first chapter of Doraemon_Special", 500)
@@ -64,6 +66,9 @@ promotion_11_11 = CoinPromotion("15/03/2024", 10, "November")
 promotion_12_12 = CoinPromotion("15/03/2024", 20, "December")
 write_a_read.add_promotion(promotion_11_11)
 write_a_read.add_promotion(promotion_12_12)
+
+book_for_promotion = Book("Promotoin", "Molapro", "Mozaza", "promo_only", "publishing", False, "Promotoin testttttttt")
+write_a_read.add_promotion(BookPromotion("15/03/2024", 10, [book_for_promotion]))
 
 #add coin transac
 Mo.add_coin_transaction_list(CoinTransaction(OnlineBanking("0123456789"), 500, "+500", "+50", "20/02/2024, 15:23:10"))
